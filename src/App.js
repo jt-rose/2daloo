@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import './App.css';
 import { Switch, Route } from "react-router-dom";
 
-import Header from "./Components/Header/Header.js";
+import Header from "./Components/Header";
 import { TaskList, TrashList } from "./Components/TaskList/listTemplate";
 import { AddTask, EditTask } from "./Components/UpdateTask/updateTaskTemplate"
 import TagEditor from "./Components/TagEditor/TagEditor";
