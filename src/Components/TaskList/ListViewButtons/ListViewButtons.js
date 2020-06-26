@@ -40,7 +40,7 @@ class ImportantButton extends Component {
 
 const buttonFormat = {
     sortABCTitle: "Sort ABC",
-    sortABCIcon: "sort alphabet up",
+    sortABCIcon: "sort alphabet down",
     reverseABCTitle: "Reverse ABC",
     reverseABCIcon: "sort alphabet down",
 
@@ -100,7 +100,7 @@ const LVBTest = (props) => (
                 <Dropdown.Menu>
                     <Dropdown.Header>Sort</Dropdown.Header>
                     <Dropdown.Item 
-                        icon="sort alphabet up" 
+                        icon="sort alphabet down" 
                         text="A to Z"  
                         onClick={props.sortABC}
                     />
