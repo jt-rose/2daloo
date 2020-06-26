@@ -1,44 +1,143 @@
-import React from "react";
-import { Accordion } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Accordion, Header, Icon, Container, Grid } from "semantic-ui-react";
 import { TaskPane, TrashPane } from "./taskPaneTemplate";
 import { connect } from "react-redux";
 
+import { filterVisibility } from "../../actions";
+
+import { TaskSortButtons, TrashSortButtons } from "./ListViewButtons/ListViewButtons";
+
 const taskType = {
     pageTitle: "Remaining:",
-    paneType: TaskPane
+    paneType: TaskPane,
+    sortButtons: TaskSortButtons
 }
 
 const trashType = {
     pageTitle: "Completed:",
-    paneType: TrashPane
+    paneType: TrashPane,
+    sortButtons: TrashSortButtons
 }
-
+/*
 const listTemplate = (listType) => (props) => {
   const panels = props.tasks.map( task => ({
     key: task.slug,
     title: task.title,
     content: {
       content: (
-      <listType.paneType content={task.content} />
+      <listType.paneType task={task} />
       )
     }
   }) );
 
   return (
     <main>
-        <h1>{listType.pageTitle}</h1>
+        <ListViewButtons />
+        <Header as="h1">{listType.pageTitle}</ Header>
         <Accordion defaultActiveIndex={0} styled={true} panels={panels} />
+        
     </main>
   )
 };//add check for none
+*/
+
+
+const listTemplateFull = (listType) => {
+  return class extends Component {
+    state = { activeIndex: 0 }
+
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps
+    const { activeIndex } = this.state
+    const newIndex = activeIndex === index ? -1 : index
+
+    this.setState({ activeIndex: newIndex })
+  }
+
+    render() {
+      const { tasks, filterImportant, filterTags } = this.props;
+      const panels = filterVisibility(tasks, filterImportant, filterTags)
+        .map( task => ({
+          key: task.slug,
+          title: task.title,
+          important: task.important,
+          content: {
+            content: (
+              <listType.paneType task={task} />
+            )
+          }
+        }) );
+
+      const { activeIndex } = this.state
+    
+ 
+      return (
+        <main>
+          <Container>
+            <Grid container columns="equal">
+              <Grid.Column>
+                <Header textAlign="left" as="h1" color="blue">{listType.pageTitle}</ Header>
+              </Grid.Column>
+              <Grid.Column textAlign="right">
+              <listType.sortButtons/>
+              </Grid.Column>
+            </Grid>
+        
+        {/*<Accordion defaultActiveIndex={0} styled={true} panels={panels} />*/}
+        <Accordion styled inverted fluid>
+          {panels.map( (panel, i) => (
+            <>
+            <Accordion.Title
+              style={{backgroundColor: "#2185d0"}}
+              styled={true}
+              active={activeIndex === i}
+              index={i}
+              onClick={this.handleClick}
+            >
+              <Grid container columns="equal">
+                <Grid.Column textAlign="left">
+                <Icon name='dropdown' />
+                </Grid.Column>
+                <Grid.Column width={10}>
+                <Header as="h2" inverted>{panel.title}</Header>
+                
+                </Grid.Column>
+                <Grid.Column textAlign="right">
+                  {panel.important && 
+                  <Icon name="exclamation" 
+                  circular 
+                  inverted 
+                  color="red" 
+                  />}
+                </Grid.Column>
+              </Grid>
+                
+            </Accordion.Title>
+            <Accordion.Content
+                active={activeIndex === i}
+            >
+                {panel.content.content}
+            </Accordion.Content>
+            </>
+          ) )}
+        </Accordion>
+        </Container>
+    </main>
+      )
+    }
+  }
+} 
+  
     
 
 
-const mapTasksState = ({tasks}) => ({tasks});
-const mapTrashState = ({trash}) => ({tasks: trash});
+const mapTasksState = ({tasks, filterImportant, filterTags}) => 
+    ({tasks, filterImportant, filterTags});
+const mapTrashState = ({trash, filterImportant, filterTags}) => 
+    ({tasks: trash, filterImportant, filterTags});
 
-export const TaskList = connect(mapTasksState, null)(listTemplate(taskType));
-export const TrashList = connect(mapTrashState, null)(listTemplate(trashType));
+export const TaskList = connect(mapTasksState, null)(listTemplateFull(taskType));
+export const TrashList = connect(mapTrashState, null)(listTemplateFull(trashType));
 
 /*
 //const mapDispatchToProps

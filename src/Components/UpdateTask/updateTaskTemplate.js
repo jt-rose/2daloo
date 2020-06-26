@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Form } from "semantic-ui-react";
+import { Form, Container, Checkbox, Dropdown, Grid, TextArea, Menu } from "semantic-ui-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import Error404 from "../Error404";
+import NotFound from "../NotFound";
 import { updateTask, createTask } from "../../actions";
 
 // empty post provided when creating new posts
@@ -15,6 +15,14 @@ const emptyPost = {
     content: "",
     tags: [],
     important: false
+}
+
+const noPostFound = {
+    slug: null,
+    title: null,
+    content: null,
+    tags: null,
+    important: null
 }
 
 // formats used to create differing Add/Edit forms from template
@@ -34,26 +42,36 @@ const editTaskFormat = {
 const updateTaskTemplate = (updateFormat) => {
     return class extends Component {
         constructor(props) {
+            // use new task form, find current task to edit, or reject with wrong url
+                
             super(props);
+            this.task = updateFormat.newTask || 
+                props.tasks.find(x => x.slug === props.match.params.editSlug) ||
+                noPostFound;
+
             this.state = {
-                title: props.task.title,
-                content: props.task.content,
-                categories: props.task.categories,
-                important: props.task.important,
+                title: this.task.title,
+                content: this.task.content,
+                categories: this.task.categories,
+                important: this.task.important,
                 redirect: false
             };
             this.updateTitle = this.updateTitle.bind(this);
             this.updateContent = this.updateContent.bind(this);
+            //this.updateCategories = this.updateCategories.bind(this);
+            this.updateImportant = this.updateImportant.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
         }
     
         updateTitle = e => this.setState({title: e.target.value});
         updateContent = e => this.setState({content: e.target.value});
+        //updateCategories = () => this.setState({...})
+        updateImportant = () => this.setState({important: !this.state.important})
         onSubmit = e => {
             e.preventDefault();
-            const { title, content } = this.state;
-            const newTask = createTask(title, content);
-            this.updateTask(newTask, this.props.task.slug);
+            const { title, content, important, categories } = this.state;
+            const newTask = createTask(title, content, important, categories);
+            this.props.updateTask(newTask, this.task.slug);
             this.setState({redirect: true});
         }
     
@@ -61,277 +79,93 @@ const updateTaskTemplate = (updateFormat) => {
             if (this.state.redirect) {
                 return (<Redirect to="/" />);
             }
+            if (this.state.title === null) {
+                return <NotFound />
+            }
+
+            const tagOptions = this.props.tags
+                .map(tag => ({
+                    key: tag.name,
+                    text: tag.name,
+                    value: tag.name
+                }) );
+
             return (
+                <Container text textAlign="left">
                 <Form 
                     onSubmit={this.onSubmit}
                     title={updateFormat.pageTitle}
                 >
-                    <Form.Input 
-                        label="Title" 
-                        placeholder="..." 
-                        value={this.state.title}
-                        onChange={this.updateTitle}
-                    />
-                    <Form.TextArea 
-                        label="Content" 
-                        placeholder="..." 
-                        value={this.state.content}
-                        onChange={this.updateContent}
-                    />
-                    {/*<ReactQuill label="Content" />*/}
-                    <Form.Checkbox label="Important" />
-                    <Form.Button>{updateFormat.buttonWording}</Form.Button>
-                </Form>
+                    <Form.Field>
+                        <label>Title</label>
+                        <input 
+                            onChange={this.updateTitle} 
+                            value={this.state.title}
+                            placeholder="..."
+                        >
+                        </input>
+                    </Form.Field>
+
+                    <Form.Field>
+                        <label>Content</label>
+                        <TextArea
+                            placeholder="..."
+                            rows={4}
+                            value={this.state.content}
+                            onChange={this.updateContent}
+                            
+                        />
+                    </Form.Field>
+
+                    <Grid >
+                        <Grid.Column >
+                        <Form.Field >
+                        <Checkbox 
+                            toggle
+                            label="Important"
+                            checked={this.state.important}
+                            onChange={this.updateImportant}
+                            />
+                    </Form.Field>
+                        </Grid.Column>
+                        <Grid.Column >
+                        <Form.Field>
+                        <Dropdown 
+                            placeholder="tags"
+                            multiple
+                            selection
+                            options={tagOptions}
+                        />
+                    </Form.Field>
+                        </Grid.Column>
+                    
+                    
+                    </Grid>
+                    
+                    <Container textAlign="center">
+
+                    <br />
+                    <Form.Button compact size="massive" color="blue">{updateFormat.buttonWording}</Form.Button>
+                
+                    </Container>
+                    </Form>
+                </Container>
             )
         }
     };
 }
 
-
-class TaskForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: props.task.title,
-            content: props.task.content,
-            categories: props.task.categories,
-            important: props.task.important,
-            redirect: false
-        };
-        this.updateTitle = this.updateTitle.bind(this);
-        this.updateContent = this.updateContent.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    updateTitle = e => this.setState({title: e.target.value});
-    updateContent = e => this.setState({content: e.target.value});
-    onSubmit = e => {
-        e.preventDefault();
-        const { title, content } = this.state;
-        const newTask = createTask(title, content);
-        this.updateTask(newTask, this.props.task.slug);
-        this.setState({redirect: true});
-    }
-
-    render() {
-        if (this.state.redirect) {
-            return (<Redirect to="/" />);
-        }
-        return (
-            <Form 
-                onSubmit={this.onSubmit}
-                title={this.props.pageTitle}
-            >
-                <Form.Input 
-                    label="Title" 
-                    placeholder="..." 
-                    value={this.state.title}
-                    onChange={this.updateTitle}
-                />
-                <Form.TextArea 
-                    label="Content" 
-                    placeholder="..." 
-                    value={this.state.content}
-                    onChange={this.updateContent}
-                />
-                {/*<ReactQuill label="Content" />*/}
-                <Form.Checkbox label="Important" />
-                <Form.Button>{this.props.buttonWording}</Form.Button>
-            </Form>
-        )
-    }
-};
-
-
-/*
-const updateTaskTemplate = (updateFormat) => {
-        return class extends Component {
-            constructor(props) {
-                super(props);
-                this.state = {
-                    title: props.task.title,
-                    content: props.task.content,
-                    categories: props.task.categories,
-                    important: props.task.important,
-                    redirect: false
-                };
-                this.updateTitle = this.updateTitle.bind(this);
-                this.updateContent = this.updateContent.bind(this);
-                this.onSubmit = this.onSubmit.bind(this);
-            }
-        
-            updateTitle = e => this.setState({title: e.target.value});
-            updateContent = e => this.setState({content: e.target.value});
-            onSubmit = e => {
-                const { title, content } = this.state;
-                e.preventDefault();
-                if (this.props.editing) {
-                    this.props.editTask(this.props.task, title, content)
-                } else {
-                    this.props.addTask(title, content);
-                };
-                this.setState({redirect: true});
-            }
-        
-            render() {
-                if (this.state.redirect) {
-                    return (<Redirect to="/" />);
-                }
-                const { pageTitle, buttonWording, newTask } = updateFormat;
-                // use new task form, find current task to edit, or reject with wrong url
-                const task = newTask || props.tasks.find(x => x.slug === props.match.params.editSlug)
-                if (!task) { return <Error404 /> };
-                return (
-                    <Form 
-                        onSubmit={this.onSubmit}
-                        title={pageTitle}
-                    >
-                        <Form.Input 
-                            label="Title" 
-                            placeholder="..." 
-                            value={this.state.title}
-                            onChange={this.updateTitle}
-                        />
-                        <Form.TextArea 
-                            label="Content" 
-                            placeholder="..." 
-                            value={this.state.content}
-                            onChange={this.updateContent}
-                        />
-                        {/*<ReactQuill label="Content" />*//*}
-                        <Form.Checkbox label="Important" />
-                        <Form.Button>{buttonWording}</Form.Button>
-                    </Form>
-                )
-            }
-        
-        }
-        };
-
-
-// create template for form to add or edit tasks
-const OLDupdateTaskTemplate = (updateFormat) => (props) => {
-    const { pageTitle, buttonWording, newTask } = updateFormat;
-    // use new task form, find current task to edit, or reject with wrong url
-    const task = newTask || props.tasks.find(x => x.slug === props.match.params.editSlug)
-    if (!task) {
-        return (
-            <Error404 />
-        )
-    } else {
-        return class extends Component {
-            constructor(props) {
-                super(props);
-                this.state = {
-                    title: task.title,
-                    content: task.content,
-                    categories: task.categories,
-                    important: task.important,
-                    redirect: false
-                };
-                this.updateTitle = this.updateTitle.bind(this);
-                this.updateContent = this.updateContent.bind(this);
-                this.onSubmit = this.onSubmit.bind(this);
-            }
-        
-            updateTitle = e => this.setState({title: e.target.value});
-            updateContent = e => this.setState({content: e.target.value});
-            onSubmit = e => {
-                const { title, content } = this.state;
-                e.preventDefault();
-                if (this.props.editing) {
-                    this.props.editTask(this.props.task, title, content)
-                } else {
-                    this.props.addTask(title, content);
-                };
-                this.setState({redirect: true});
-            }
-        
-            render() {
-                if (this.state.redirect) {
-                    return (<Redirect to="/" />);
-                } else {
-                return (
-                    <Form 
-                        onSubmit={this.onSubmit}
-                        title={pageTitle}
-                    >
-                        <Form.Input 
-                            label="Title" 
-                            placeholder="..." 
-                            value={this.state.title}
-                            onChange={this.updateTitle}
-                        />
-                        <Form.TextArea 
-                            label="Content" 
-                            placeholder="..." 
-                            value={this.state.content}
-                            onChange={this.updateContent}
-                        />
-                        {/*<ReactQuill label="Content" />*//*}
-                        <Form.Checkbox label="Important" />
-                        <Form.Button>{buttonWording}</Form.Button>
-                    </Form>
-                )
-            }
-        
-        }
-        }
-    }
-
-};*/
-
 // create Add and Edit forms, unconnected ("UC") to redux store
 const AddTaskUC = updateTaskTemplate(addTaskFormat);
 const EditTaskUC = updateTaskTemplate(editTaskFormat);
-/*const TaskFormRouteUC = ({isNewTask}) => {
-    if (isNewTask) {
-        return <AddTask 
-                    task={emptyPost} 
-                    pageTitle={}
-                    buttonWording={}
-                />
-    }
-    const editTask = props.tasks.find(x => x.slug === props.match.params.editSlug);
-    if (editTask) {
-        return <EditTask
-                    task={editTask}
-                    pageTitle={}
-                    buttonWording={}
-                />
-    }
-    return <Error404 />
-
-}*/
 
 // map out redux connections
-const mapStateToProps = ({ tasks }) => ({ tasks});
+const mapStateToProps = ({ tasks, tags }) => ({ tasks, tags });
 const mapDispatchToProps = dispatch => ({
-    editTask: (newTask, oldSlug) => dispatch(updateTask(newTask, oldSlug))
+    updateTask: (newTask, oldSlug) => dispatch(updateTask(newTask, oldSlug))
 });
 const reduxConnect = connect(mapStateToProps, mapDispatchToProps);
 
 // export connected Add/ Edit forms
 export const AddTask = reduxConnect(AddTaskUC);
 export const EditTask = reduxConnect(EditTaskUC);
-/*const TaskFormRouteUC = ({isNewTask}) => {
-    if (isNewTask) {
-        return <AddTask 
-                    task={emptyPost} 
-                    pageTitle={}
-                    buttonWording={}
-                />
-    }
-    const editTask = props.tasks.find(x => x.slug === props.match.params.editSlug);
-    if (editTask) {
-        return <EditTask
-                    task={editTask}
-                    pageTitle={}
-                    buttonWording={}
-                />
-    }
-    return <Error404 />
-
-}
-
-export const TaskFormRoute*/

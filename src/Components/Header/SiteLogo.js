@@ -1,17 +1,16 @@
 import React from "react";
-import { Header as SUIHeader } from "semantic-ui-react";
-import NavBar from "./NavBar";
+import { Header } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
-const Header = (props) => (
-    <header>
-       <SUIHeader as="h1">
-            2do
-            <SUIHeader.Subheader>
-                A React todo app with redux, react-router, and semantic UI
-            </SUIHeader.Subheader>
-        </SUIHeader>
-        <NavBar />
-    </header>
+const SiteLogo = () => (
+    <NavLink to="/">
+        <Header as="h1" inverted>
+            2daloo
+            <Header.Subheader >
+                A Next-Gen ToDo App
+            </Header.Subheader>
+        </Header>
+    </NavLink>
 )
 
-export default Header;
+export default SiteLogo;

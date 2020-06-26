@@ -1,8 +1,14 @@
 import manageTasks from "./manageTasks";
 import manageTrash from "./manageTrash";
+import manageTags from "./manageTags";
+import filterImportant from "./filterImportant";
+import filterTags from "./filterTags";
 import { combineReducers } from "redux";
 
 export default combineReducers({
     tasks: manageTasks,
-    trash: manageTrash
+    trash: manageTrash,
+    tags: manageTags,
+    filterImportant,
+    filterTags
 });

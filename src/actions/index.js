@@ -20,6 +20,13 @@ export const SORT_TRASH_ABC_REVERSE = "SORT_TRASH_ABC_REVERSE";
 export const SORT_TRASH_DATE = "SORT_TRASH_DATE";
 export const SORT_TRASH_DATE_REVERSE = "SORT_TRASH_DATE_REVERSE";
 
+export const UPDATE_TAG = "UPDATE_TAG";
+export const REMOVE_TAG = "REMOVE_TAG";
+
+export const TOGGLE_IMPORTANT = "TOGGLE_IMPORTANT";
+
+export const TOGGLE_TAG_VISIBILITY = "TOGGLE_TAG_VISIBILITY";
+
 // Action Creators
 
 const actionTypeObj = typeDesc => ({type: typeDesc});
@@ -33,20 +40,52 @@ export const sortTrashABCReverse = actionTypeObj(SORT_TRASH_ABC_REVERSE);
 export const sortTrashDate = actionTypeObj(SORT_TRASH_DATE);
 export const sortTrashDateReverse = actionTypeObj(SORT_TRASH_DATE_REVERSE);
 
+export const toggleImportant = actionTypeObj(TOGGLE_IMPORTANT);
+
 const createSlug = title => 
     title.trim()
     .toLowerCase()
+    .replace(/,/g, "")
     .replace(/ /g, "-");
 
+export const formatDate = (date) => {
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+};
 
-export const createTask = (title, content,  /*category, importance*/) => ({
+// creates task object which is then passed to updateTask dispatch
+export const createTask = (title, content, important, tags) => ({
         title,
-        content, 
-        //category, 
-        //importance,
+        content,
+        important,
+        tags, 
         created: new Date(),
         slug: createSlug(title) // check for duplicates
-})
+});
+
+// apply visibility filters to list of tasks
+const applyImportantFilter = (tasks, onlyImportant) => {
+    if (onlyImportant) {
+        return tasks.filter(task => task.important)
+    } else {
+        return tasks;
+    }
+};
+
+const applyTagFilter = (tasks, filteredTags) => {
+    if (filteredTags.length === 0) {
+        return tasks;
+    } else {
+        return tasks.filter(task => 
+            task.tags.find(tagName => 
+                filteredTags.includes(tagName)))
+    }
+};
+
+export const filterVisibility = (tasks, onlyImportant, filteredTags) => 
+    applyTagFilter(applyImportantFilter(tasks, onlyImportant), filteredTags);
 
 export const updateTask = (newTask, oldSlug=null) => ({
     type: UPDATE_TASK,
@@ -55,9 +94,9 @@ export const updateTask = (newTask, oldSlug=null) => ({
 });
 
 
-export const removeTask = (slug) => ({
+export const removeTask = (task) => ({
     type: REMOVE_TASK,
-    slug
+    task
 });
 
 
@@ -67,21 +106,38 @@ export const updateTrash = (task) => ({
     task
 });
 
-export const removeTrash = (slug) => ({
+export const removeTrash = (task) => ({
     type: REMOVE_TRASH,
-    slug
+    task
 });
 
 export function moveToTrash(task) {
     return function(dispatch) {
-        dispatch(removeTask(task.slug));
+        dispatch(removeTask(task));
         dispatch(updateTrash(task))
     }
 };
 
 export function restoreTrash(task) {
     return function(dispatch) {
-        dispatch(removeTrash(task.slug));
+        dispatch(removeTrash(task));
         dispatch(updateTask(task))
     }//check if new task created first
 };
+
+
+export const updateTag = (tag, oldName = null) => ({
+    type: UPDATE_TAG,
+    tag,
+    oldName
+});
+
+export const removeTag = (tag) => ({
+    type: REMOVE_TAG,
+    tag
+});
+
+export const toggleTagVisibility = (tagName) => ({
+    type: TOGGLE_TAG_VISIBILITY,
+    tagName
+});
