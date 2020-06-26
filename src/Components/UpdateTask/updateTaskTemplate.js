@@ -126,7 +126,8 @@ const updateTaskTemplate = (updateFormat) => {
                             />
                     </Form.Field>
                         </Grid.Column>
-                        <Grid.Column >
+
+                        <Grid.Column>
                         <Form.Field>
                         <Dropdown 
                             placeholder="tags"

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { filterVisibility } from "../../actions";
 
-import { TaskSortButtons, TrashSortButtons } from "./ListViewButtons/ListViewButtons";
+import { TaskSortButtons, TrashSortButtons } from "./ListViewButtons";
 
 const taskType = {
     pageTitle: "Remaining:",
