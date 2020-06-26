@@ -8,4 +8,9 @@ export const checkContentLength = correctLength(300, 1);
 export const checkTagNameLength = correctLength(1, 1);
 export const checkTagDescriptionLength = correctLength(25);
 
+export const confirmUnique = (newTitle, titleList) => {
+    const duplicateFound = titleList.some(title => title === newTitle);
+    return !duplicateFound;
+};
+
 //xss
