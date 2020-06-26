@@ -3,14 +3,13 @@ import { connect } from "react-redux";
 import './App.css';
 import { Switch, Route } from "react-router-dom";
 
-import Header from "./Components/Header/Header.js"
-//import NavBar from "./Components/Header/NavBar"
-import { TaskList, TrashList } from "./Components/TaskList/listTemplate"
+import Header from "./Components/Header/Header.js";
+import { TaskList, TrashList } from "./Components/TaskList/listTemplate";
 import { AddTask, EditTask } from "./Components/UpdateTask/updateTaskTemplate"
 import TagEditor from "./Components/TagEditor/TagEditor";
-import Login from "./Components/Login"
-import SignUp from "./Components/Login/SignUp"
-import Error404 from "./Components/Error404"
+import Login from "./Components/Login";
+import SignUp from "./Components/Login/SignUp";
+import Error404 from "./Components/Error404";
 
 function App(props) {
   return (
@@ -30,7 +29,7 @@ function App(props) {
       </Switch>
     </div>
   );
-}
+};
 
 const mapStateToProps = ({tasks, trash}) => ({tasks, trash});
 export default connect(mapStateToProps, null)(App);

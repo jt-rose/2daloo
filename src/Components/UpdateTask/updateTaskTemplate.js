@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Form, Container, Checkbox, Dropdown, Grid, TextArea, Menu } from "semantic-ui-react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 import NotFound from "../NotFound";
