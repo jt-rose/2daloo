@@ -50,25 +50,33 @@ const updateTaskTemplate = (updateFormat) => {
             this.state = {
                 title: this.task.title,
                 content: this.task.content,
-                categories: this.task.categories,
+                tags: this.task.tags,
                 important: this.task.important,
                 redirect: false
             };
             this.updateTitle = this.updateTitle.bind(this);
             this.updateContent = this.updateContent.bind(this);
-            //this.updateCategories = this.updateCategories.bind(this);
+            this.updateTags = this.updateTags.bind(this);
             this.updateImportant = this.updateImportant.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
         }
     
         updateTitle = e => this.setState({title: e.target.value});
         updateContent = e => this.setState({content: e.target.value});
-        //updateCategories = () => this.setState({...})
+        updateTags = currentTag => {
+            if (this.state.tags.includes(currentTag)) {
+                const updatedTags = this.state.tags.filter(tag => tag !== currentTag);
+                this.setState({ tags: updatedTags});
+            } else {
+                const updatedTags = [...this.state.tags, currentTag];
+                this.setState({ tags: updatedTags});
+                }//tagNames or tagObjects?
+        }
         updateImportant = () => this.setState({important: !this.state.important})
         onSubmit = e => {
             e.preventDefault();
-            const { title, content, important, categories } = this.state;
-            const newTask = createTask(title, content, important, categories);
+            const { title, content, important, tags } = this.state;
+            const newTask = createTask(title, content, important, tags);
             this.props.updateTask(newTask, this.task.slug);
             this.setState({redirect: true});
         }
@@ -81,12 +89,8 @@ const updateTaskTemplate = (updateFormat) => {
                 return <NotFound />
             }
 
-            const tagOptions = this.props.tags
-                .map(tag => ({
-                    key: tag.name,
-                    text: tag.name,
-                    value: tag.name
-                }) );
+            const tagNames = this.props.tags
+                .map(tag => tag.name);
 
             return (
                 <Container text textAlign="left">
@@ -133,8 +137,20 @@ const updateTaskTemplate = (updateFormat) => {
                             placeholder="tags"
                             multiple
                             selection
-                            options={tagOptions}
-                        />
+                            closeOnChange={false}
+                        >
+                            <Dropdown.Menu>
+                                {tagNames.map(tag => (
+                                    <Dropdown.Item
+                                    key={tag}
+                                    text={tag}
+                                    value={tag}
+                                    onClick={() => this.updateTags(tag)}
+                                    active={this.state.tags.includes(tag)}
+                                    />
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown> 
                     </Form.Field>
                         </Grid.Column>
                     
