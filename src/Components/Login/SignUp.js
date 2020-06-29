@@ -65,7 +65,7 @@ class SignUp2 extends Component {
     updateConfirmPassword = e => this.setState({ confirmPassword: e.target.value});
 
     render() {
-        const { password, confirmPassword } = this.state; 
+        const { email, username, password, confirmPassword } = this.state; 
         const passwordLongEnough = password.length > 7;
         const passwordIncludesSpecChars = confirmSpecialCharacter(password);
         const passwordUpperAndLower = confirmUpperAndLowerCase(password);
@@ -74,7 +74,9 @@ class SignUp2 extends Component {
             passwordLongEnough && 
             passwordIncludesSpecChars &&
             passwordUpperAndLower &&
-            passwordsMatch
+            passwordsMatch &&
+            email.length > 0 &&
+            username.length > 0
         );
 
         return (
