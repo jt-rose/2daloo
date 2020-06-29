@@ -137,7 +137,7 @@ const updateTaskTemplate = (updateFormat) => {
                             placeholder="tags"
                             multiple
                             selection
-                            closeOnChange={false}
+                            //closeOnChange={false}
                         >
                             <Dropdown.Menu>
                                 {tagNames.map(tag => (
