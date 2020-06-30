@@ -1,8 +1,27 @@
 import React, { Component } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { Form, Button, Input } from "semantic-ui-react";
+import { Form, Button, Input, Divider } from "semantic-ui-react";
 import { toggleLogin } from "../../actions";
+
+const signUpContainerStyle = {
+    display: "flex", 
+    justifyContent: "center",
+    textAlign: "center"
+};
+
+const formStyle = {
+    display: "flex",
+    flexDirection: "column",
+    border: ".2em solid #2185d0",
+    borderRadius: ".5em",
+    padding: "1em",
+    minWidth: "300px"
+};
+
+const centerSpacing = {
+    textAlign: "center"
+};
 
 class Login extends Component {
     constructor(props) {
@@ -34,10 +53,11 @@ class Login extends Component {
         const { username, password } = this.state;
         const nothingEntered = username.length === 0 || password.length === 0;
         return (
-            <div>
+            <div style={signUpContainerStyle}>
     <Form 
         size="mini"
         onSubmit={this.onSubmit}
+        style={formStyle}
     >
         <Form.Field inline >
             <Input  
@@ -54,16 +74,22 @@ class Login extends Component {
             type="password"
         />
         </Form.Field>
+        <div style={centerSpacing}>
         <Button 
+            compact
+            size="big"
             color="blue"
             disabled={nothingEntered}
         >
             Go!
         </Button>
-    </Form>
-    <br />
+        </div>
+        
+        <Divider hidden/>
     <p>Forgot username/password? Click <NavLink to="/forgot-password">here</NavLink></p>
     <p>New user? <NavLink to="/sign-up">Create an account</NavLink></p>
+    </Form>
+    
     </div>
         );
     }
