@@ -27,6 +27,8 @@ export const TOGGLE_IMPORTANT = "TOGGLE_IMPORTANT";
 
 export const TOGGLE_TAG_VISIBILITY = "TOGGLE_TAG_VISIBILITY";
 
+export const TOGGLE_LOGIN = "TOGGLE_LOGIN";
+
 // Action Creators
 
 const actionTypeObj = typeDesc => ({type: typeDesc});
@@ -41,6 +43,8 @@ export const sortTrashDate = actionTypeObj(SORT_TRASH_DATE);
 export const sortTrashDateReverse = actionTypeObj(SORT_TRASH_DATE_REVERSE);
 
 export const toggleImportant = actionTypeObj(TOGGLE_IMPORTANT);
+
+export const toggleLogin = actionTypeObj(TOGGLE_LOGIN);
 
 const createSlug = title => 
     title.trim()

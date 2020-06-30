@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import SiteLogo from "./SiteLogo";
 import NavBar from "./NavBar";
+import LoginButton from "./LoginButton";
 
 import { Menu, Button, Header as SUIHeader, Container, Grid } from "semantic-ui-react";
 /*
@@ -84,16 +85,7 @@ const Header = () => (
         <NavBar />
 
         <Menu.Item position="right">
-            <NavLink to="/login">
-                <Button 
-                    color="blue"
-                    style={{
-                    border: ".12em solid #ffffff"
-                    }}
-                >
-                    Login
-                </Button>
-            </NavLink>
+            <LoginButton />
         </Menu.Item>
         </Container>
     </Menu>

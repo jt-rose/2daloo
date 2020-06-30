@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { toggleLogin } from "../../actions";
 import { Form, Label, Header, List, Icon, Divider } from "semantic-ui-react";
 import { 
-    confirmUnique, 
     confirmSpecialCharacter,
-    confirmNumberIncluded,
     confirmUpperAndLowerCase
 
 } from "../ErrorMessage/formValidation";
@@ -15,12 +16,6 @@ const FailValidationIcon = () => (
     <Icon name="x" color="red"/>
     );
 
-const signUpLabels = [
-    "Email", 
-    "Username", 
-    "Password", 
-    "Confirm Password"
-];
 const signUpContainerStyle = {
     display: "flex", 
     justifyContent: "center",
@@ -48,23 +43,34 @@ class SignUp2 extends Component {
             username: "",
             password: "",
             confirmPassword: "",
-            passwordLongEnough: false,
-            upperLowerUsed: false,
-            specCharsUsed: false,
-            passwordsMatch: false
+            redirect: false
         };
         this.updateEmail = this.updateEmail.bind(this);
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
         this.updateConfirmPassword = this.updateConfirmPassword.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     };
     
     updateEmail = e => this.setState({email: e.target.value});
     updateUsername = e => this.setState({username: e.target.value});
     updatePassword = e => this.setState({password: e.target.value});
     updateConfirmPassword = e => this.setState({ confirmPassword: e.target.value});
+    onSubmit = e => {
+        e.preventDefault();
+        this.props.toggleLogin();
+        this.setState({redirect: true});
+        /* In a full-stack app, this would communicate with the backend 
+        before returning to the home page */
+    };
 
     render() {
+        if (this.state.redirect) {
+            return (
+                <Redirect to="/" />
+            );
+        }
+
         const { email, username, password, confirmPassword } = this.state; 
         const passwordLongEnough = password.length > 7;
         const passwordIncludesSpecChars = confirmSpecialCharacter(password);
@@ -81,7 +87,10 @@ class SignUp2 extends Component {
 
         return (
             <div style={signUpContainerStyle}>
-        <Form style={formStyle}>
+        <Form 
+            style={formStyle}
+            onSubmit={this.onSubmit}
+        >
         <Label 
             fluid
             color="blue" 
@@ -148,6 +157,7 @@ class SignUp2 extends Component {
                         color="blue" 
                         size="big"
                         disabled={!allPassing}
+                        type="submit"
                     >
                         Submit
                     </Form.Button>
@@ -158,47 +168,8 @@ class SignUp2 extends Component {
     }
 };
 
+const mapDispatchToProps = dispatch => ({
+    toggleLogin: () => dispatch(toggleLogin)
+});
 
-const SignUp = () => (
-    <div style={signUpContainerStyle}>
-        <Form style={formStyle}>
-        <Label 
-            fluid
-            color="blue" 
-            style={{marginBottom: "2em"}}
-        >
-            <Header 
-                inverted 
-                as="h2"  
-                style={centerSpacing}
-            >Sign-Up</Header>
-        </Label><br />
-                {signUpLabels.map(labelWording => (
-                    <Form.Field>
-                        <label style={{color: "#2185d0"}}>{labelWording}</label>
-                        <input placeholder="..."/>
-                    </Form.Field>
-                ))}
-                <List>
-                    <List.Item>
-                        At least 8 characters long
-                    </List.Item>
-                    <List.Item>
-                        Both upper and lower case characters
-                    </List.Item>
-                    <List.Item>
-                        special character - !@#$%&*?
-                    </List.Item>
-                    <List.Item>
-                        passwords match
-                    </List.Item>
-                </List>
-                <div style={centerSpacing}>
-                    <Form.Button color="blue" size="big">Submit</Form.Button>
-                </div>
-            </Form>
-    </div>
-            
-);
-
-export default SignUp2;
+export default connect(null, mapDispatchToProps)(SignUp2);

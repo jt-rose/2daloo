@@ -3,6 +3,8 @@ import manageTrash from "./manageTrash";
 import manageTags from "./manageTags";
 import filterImportant from "./filterImportant";
 import filterTags from "./filterTags";
+import loggedIn from "./manageLogin";
+
 import { combineReducers } from "redux";
 
 export default combineReducers({
@@ -10,5 +12,6 @@ export default combineReducers({
     trash: manageTrash,
     tags: manageTags,
     filterImportant,
-    filterTags
+    filterTags,
+    loggedIn
 });
