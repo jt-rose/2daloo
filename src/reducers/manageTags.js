@@ -23,7 +23,7 @@ const manageTags = (state=initialState, action) => {
                 const foundAt = state.findIndex(x => x.slug === action.oldName);
             return [...state.slice(0, foundAt), action.tag, ...state.slice(foundAt+1)];
             }
-            return state.concat(action.category); 
+            return state.concat(action.tag); 
         case REMOVE_TAG:
             return state.filter(x => x.name !== action.tag.name);
         default:

@@ -6,7 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "./Components/Header";
 import { TaskList, TrashList } from "./Components/TaskList/listTemplate";
 import { AddTask, EditTask } from "./Components/UpdateTask/updateTaskTemplate"
-import TagEditor from "./Components/TagEditor/TagEditor";
+import TagEditor from "./Components/TagEditor";
 import Login from "./Components/Login";
 import SignUp from "./Components/Login/SignUp";
 import Error404 from "./Components/Error404";

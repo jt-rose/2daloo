@@ -130,7 +130,7 @@ export function restoreTrash(task) {
 };
 
 
-export const updateTag = (tag, oldName = null) => ({
+export const updateTag = (tag, oldName = false) => ({
     type: UPDATE_TAG,
     tag,
     oldName
