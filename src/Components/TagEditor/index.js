@@ -13,7 +13,13 @@ const TagEditor = (props) => (
                         <div style={{display: "flex"}}>
                     <Label color={tag.color} tag style={{minWidth: "8em"}}>{tag.name}</Label>
                     <p>{tag.description}</p>
-                    <Button circular icon="x" size="small" onClick={ () => props.removeTag(tag)}/>
+                    <Button 
+                        circular 
+                        icon="x" 
+                        size="small" 
+                        color="red"
+                        onClick={ () => props.removeTag(tag)}
+                    />
                     </div>
                 ))}
                 <AddTag />

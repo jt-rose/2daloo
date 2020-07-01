@@ -88,8 +88,8 @@ class AddTag extends Component {
                 />
                     </Form.Field>
 
-                <Form.Button type="submit" content="Submit"/>
-                <Form.Button type="button" icon="x" onClick={() => this.resetTag()}/>
+                <Form.Button type="submit" content="add" color="blue"/>
+                <Form.Button type="button" icon="undo" color="blue" onClick={() => this.resetTag()}/>
                 </Form.Group>
             </Form>
         )
