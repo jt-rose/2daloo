@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Dropdown } from "semantic-ui-react";
 
-import { updateTag, removeTag } from "../../actions";
-
-const emptyTag = {
-    name: "",
-    description: "",
-    color: ""
-};
+import { createTag } from "../../actions";
 
 const semanticColors = [
     "red",
@@ -34,19 +28,16 @@ const colorOptions = semanticColors.map( color => ({
         name: "circle",
         color: color
     }
-}))
+}));
 
 class AddTag extends Component {
     constructor(props) {
         super(props);
-        const tag = this.props.tag || emptyTag;
-        const { name, description, color } = tag;
 
         this.state = {
-            name,
-            description,
-            color,
-            colorSelection: ""
+            name: "",
+            description: "",
+            color: ""
         };
         this.updateName = this.updateName.bind(this);
         this.updateDescription = this.updateDescription.bind(this);
@@ -64,9 +55,7 @@ class AddTag extends Component {
     });
     onSubmit = e => {
         e.preventDefault();
-        const newTag = this.state;
-        const oldTagName = this.props.tag || false;
-        this.props.updateTag(newTag, oldTagName);
+        this.props.createTag(this.state);
         this.setState({
             name: "",
             description: "",
@@ -81,7 +70,7 @@ class AddTag extends Component {
                 <Form.Group>
                 <Form.Input 
                     onChange={this.updateName}
-                    placeholder="Tag Name"
+                    placeholder="tag name"
                     value={this.state.name}
                 />
                 <Form.Input 
@@ -109,8 +98,7 @@ class AddTag extends Component {
 
 const mapStateToProps = ({ tags }) => ({ tags });
 const mapDispatchToProps = dispatch => ({
-    updateTag: (tag, oldName) => dispatch(updateTag(tag, oldName)),
-    //removeTag: (tag) => dispatch(removeTag(tag))
+    createTag: (tag) => dispatch(createTag(tag))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTag);

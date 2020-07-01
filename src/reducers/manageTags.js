@@ -1,5 +1,5 @@
 import { 
-    UPDATE_TAG,
+    CREATE_TAG,
     REMOVE_TAG
 } from "../actions";
 
@@ -18,11 +18,7 @@ const initialState = [
 
 const manageTags = (state=initialState, action) => {
     switch(action.type) {
-        case UPDATE_TAG:
-            if (action.oldName) {
-                const foundAt = state.findIndex(x => x.slug === action.oldName);
-            return [...state.slice(0, foundAt), action.tag, ...state.slice(foundAt+1)];
-            }
+        case CREATE_TAG:
             return state.concat(action.tag); 
         case REMOVE_TAG:
             return state.filter(x => x.name !== action.tag.name);

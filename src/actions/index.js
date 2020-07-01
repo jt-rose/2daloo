@@ -20,7 +20,7 @@ export const SORT_TRASH_ABC_REVERSE = "SORT_TRASH_ABC_REVERSE";
 export const SORT_TRASH_DATE = "SORT_TRASH_DATE";
 export const SORT_TRASH_DATE_REVERSE = "SORT_TRASH_DATE_REVERSE";
 
-export const UPDATE_TAG = "UPDATE_TAG";
+export const CREATE_TAG = "CREATE_TAG";
 export const REMOVE_TAG = "REMOVE_TAG";
 
 export const TOGGLE_IMPORTANT = "TOGGLE_IMPORTANT";
@@ -130,10 +130,9 @@ export function restoreTrash(task) {
 };
 
 
-export const updateTag = (tag, oldName = false) => ({
-    type: UPDATE_TAG,
-    tag,
-    oldName
+export const createTag = (tag) => ({
+    type: CREATE_TAG,
+    tag
 });
 
 export const removeTag = (tag) => ({
