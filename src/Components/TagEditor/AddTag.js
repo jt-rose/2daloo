@@ -36,29 +36,21 @@ class AddTag extends Component {
 
         this.state = {
             name: "",
-            description: "",
             color: ""
         };
         this.updateName = this.updateName.bind(this);
         this.updateDescription = this.updateDescription.bind(this);
         this.updateColor = this.updateColor.bind(this);
-        this.resetTag = this.resetTag.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     };
     updateName = e => this.setState({name: e.target.value});
     updateDescription = e => this.setState({description: e.target.value});
     updateColor = (e, {value}) => this.setState({color: value});
-    resetTag = () => this.setState({
-        name: "",
-        description: "",
-        color: ""
-    });
     onSubmit = e => {
         e.preventDefault();
         this.props.createTag(this.state);
         this.setState({
             name: "",
-            description: "",
             color: ""
         });
         };
@@ -72,11 +64,6 @@ class AddTag extends Component {
                     onChange={this.updateName}
                     placeholder="tag name"
                     value={this.state.name}
-                />
-                <Form.Input 
-                    onChange={this.updateDescription}
-                    placeholder="add an optional description"
-                    value={this.state.description}
                 />
                 <Form.Field>
                 <Dropdown 
@@ -93,12 +80,6 @@ class AddTag extends Component {
                     content="add" 
                     color="blue"
                     disabled={this.state.name.length === 0}
-                />
-                <Form.Button 
-                    type="button" 
-                    icon="undo" 
-                    color="blue" 
-                    onClick={() => this.resetTag()}
                 />
                 </Form.Group>
             </Form>

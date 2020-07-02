@@ -6,12 +6,10 @@ import {
 const initialState = [
     {
         name: "redux",
-        description: "state management tools",
         color: "red"
     },
     {
         name: "UI-library",
-        description: "UI Components out of the box",
         color: "blue"
     }
 ];
