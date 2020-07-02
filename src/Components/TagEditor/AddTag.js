@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Dropdown } from "semantic-ui-react";
+import { Form, Dropdown, Grid } from "semantic-ui-react";
 
 import { createTag } from "../../actions";
 
@@ -39,12 +39,10 @@ class AddTag extends Component {
             color: ""
         };
         this.updateName = this.updateName.bind(this);
-        this.updateDescription = this.updateDescription.bind(this);
         this.updateColor = this.updateColor.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     };
     updateName = e => this.setState({name: e.target.value});
-    updateDescription = e => this.setState({description: e.target.value});
     updateColor = (e, {value}) => this.setState({color: value});
     onSubmit = e => {
         e.preventDefault();
@@ -58,13 +56,21 @@ class AddTag extends Component {
     render() {
         return (
             //add container?
-            <Form onSubmit={this.onSubmit}>
-                <Form.Group>
+            <Form 
+                onSubmit={this.onSubmit}
+            >
+                {/*<Form.Group>*/}
+                <Grid stackable columns={3}>
+
+                <Grid.Column>
                 <Form.Input 
                     onChange={this.updateName}
                     placeholder="tag name"
                     value={this.state.name}
                 />
+                </Grid.Column>
+
+                <Grid.Column>
                 <Form.Field>
                 <Dropdown 
                     onChange={this.updateColor}
@@ -73,15 +79,19 @@ class AddTag extends Component {
                     selection
                     value={this.state.color}
                 />
+                
                     </Form.Field>
-
+                    </Grid.Column>
+                    <Grid.Column>
                 <Form.Button 
                     type="submit" 
                     content="add" 
                     color="blue"
                     disabled={this.state.name.length === 0}
                 />
-                </Form.Group>
+                </Grid.Column>
+                {/*</Form.Group>*/}
+                </Grid>
             </Form>
         )
     }
