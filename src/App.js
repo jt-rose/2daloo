@@ -20,7 +20,7 @@ function App(props) {
         <Route exact path="/" component={TaskList} />
         <Route exact path="/add" component={AddTask} />
         <Route path="/edit/:editSlug" component={EditTask} />
-        <Route exact path="/settings" component={TagEditor} />
+        <Route exact path="/tags" component={TagEditor} />
         <Route exact path="/trash" component={TrashList} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/sign-up" component={SignUp} />

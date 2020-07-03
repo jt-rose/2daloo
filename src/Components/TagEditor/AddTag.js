@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Dropdown, Grid } from "semantic-ui-react";
+import { Form, Dropdown, Grid, Transition } from "semantic-ui-react";
 
 import { createTag } from "../../actions";
 
@@ -36,17 +36,25 @@ class AddTag extends Component {
 
         this.state = {
             name: "",
-            color: ""
+            color: "",
+            visibility: true
         };
         this.updateName = this.updateName.bind(this);
         this.updateColor = this.updateColor.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     };
-    updateName = e => this.setState({name: e.target.value});
+    updateName = e => {
+        if (e.target.value.length > 10) {
+            this.setState({visibility: !this.state.visibility});
+        } else {
+            this.setState({name: e.target.value});
+        }
+    };
     updateColor = (e, {value}) => this.setState({color: value});
     onSubmit = e => {
         e.preventDefault();
-        this.props.createTag(this.state);
+        const { name, color } = this.state;
+        this.props.createTag({name, color});
         this.setState({
             name: "",
             color: ""
@@ -63,11 +71,18 @@ class AddTag extends Component {
                 <Grid stackable columns={3}>
 
                 <Grid.Column>
-                <Form.Input 
+                    <Transition
+                        visible={this.state.visibility}
+                        animation="shake"
+                        duration={300}
+                    >
+                    <Form.Input 
                     onChange={this.updateName}
                     placeholder="tag name"
                     value={this.state.name}
                 />
+                    </Transition>
+                
                 </Grid.Column>
 
                 <Grid.Column>

@@ -14,9 +14,9 @@ const headerLinks = [
         navLinkURL: "/add"
     },
     {
-        iconName: "settings",
-        labelName: "Settings",
-        navLinkURL: "/settings"
+        iconName: "tags",
+        labelName: "Tags",
+        navLinkURL: "/tags"
     },
     {
         iconName: "trash alternate",
@@ -25,7 +25,7 @@ const headerLinks = [
     }
 ];
 
-const NV2 = () => (
+const NavBar = () => (
     <Menu icon="labeled" secondary>
         {headerLinks.map(hLink => (
             <NavLink to={hLink.navLinkURL}>
@@ -37,7 +37,7 @@ const NV2 = () => (
         ))}
     </Menu>
 );
-
+/*
 class NavBar extends Component {
     constructor(props) {
         super(props);
@@ -85,5 +85,5 @@ class NavBar extends Component {
         )
     }
 };
-  
-export default NV2;
+  */
+export default NavBar;
