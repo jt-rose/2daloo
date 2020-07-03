@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Form, Container, Checkbox, Dropdown, Grid, TextArea, Menu } from "semantic-ui-react";
+import { Form, Container, Checkbox, Dropdown, Grid, TextArea, Icon } from "semantic-ui-react";
 
 import NotFound from "../NotFound";
 import { updateTask, createTask } from "../../actions";
@@ -35,6 +35,7 @@ const editTaskFormat = {
     buttonWording: "Update",
     newTask: false
 }
+
 
 //test out isolated class
 const updateTaskTemplate = (updateFormat) => {
@@ -70,7 +71,7 @@ const updateTaskTemplate = (updateFormat) => {
             } else {
                 const updatedTags = [...this.state.tags, currentTag];
                 this.setState({ tags: updatedTags});
-                }//tagNames or tagObjects?
+                }
         }
         updateImportant = () => this.setState({important: !this.state.important})
         onSubmit = e => {
@@ -91,6 +92,9 @@ const updateTaskTemplate = (updateFormat) => {
 
             const tagNames = this.props.tags
                 .map(tag => tag.name);
+            
+            const { title, content } = this.state;
+            const validContent = title.length > 0 && content.length > 0;
 
             return (
                 <Container text textAlign="left">
@@ -119,17 +123,27 @@ const updateTaskTemplate = (updateFormat) => {
                         />
                     </Form.Field>
 
-                    <Grid >
+                    <Grid columns="equal">
                         <Grid.Column >
                         <Form.Field >
+                            
+                            <Icon 
+                                name="exclamation circle" 
+                                color={this.state.important ? "red" : "grey"} 
+                                style={{
+                                    fontSize: "2.6em", 
+                                    lineHeight: "1"}}
+                                onClick={this.updateImportant}/>
                         <Checkbox 
-                            toggle
-                            label="Important"
+                            slider
+                            //label="Important"
                             checked={this.state.important}
                             onChange={this.updateImportant}
                             />
                     </Form.Field>
                         </Grid.Column>
+
+                        <Grid.Column />
 
                         <Grid.Column>
                         <Form.Field>
@@ -137,6 +151,7 @@ const updateTaskTemplate = (updateFormat) => {
                             placeholder="tags"
                             multiple
                             selection
+                            style={{minWidth: "7em"}}
                             //closeOnChange={false}
                         >
                             <Dropdown.Menu>
@@ -160,7 +175,14 @@ const updateTaskTemplate = (updateFormat) => {
                     <Container textAlign="center">
 
                     <br />
-                    <Form.Button compact size="massive" color="blue">{updateFormat.buttonWording}</Form.Button>
+                    <Form.Button 
+                        compact 
+                        size="massive" 
+                        color="blue"
+                        disabled={!validContent}
+                    >
+                        {updateFormat.buttonWording}
+                    </Form.Button>
                 
                     </Container>
                     </Form>
