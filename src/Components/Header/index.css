@@ -1,0 +1,30 @@
+.NavBar {
+    display: block;
+}
+
+.NBOI-container {
+    width: 100%;
+    background-color: #2185d0;
+    display: flex;
+    justify-content: center;
+    border-bottom: .1em solid #ffffff;
+    
+}
+
+.NavBarOnlyIcons {
+    display: none;
+    width: 80%;
+    border-top: .1em solid #ffffff;
+    
+}
+
+@media (max-width: 685px) {
+    .NavBar {
+        display: none;
+    }
+
+    .NavBarOnlyIcons {
+        display: block;
+    }
+    
+}

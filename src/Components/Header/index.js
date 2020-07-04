@@ -1,11 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import SiteLogo from "./SiteLogo";
-import NavBar from "./NavBar";
+import { NavBar, NavBarOnlyIcons } from "./NavBar";
 import LoginButton from "./LoginButton";
 
-import { Menu, Button, Header as SUIHeader, Container, Grid } from "semantic-ui-react";
+import { Menu, Container, Divider } from "semantic-ui-react";
+
+import "./index.css";
 /*
 const HeaderGrid = () => (
     <Grid  fixed="top" inverted color="blue">
@@ -71,24 +72,38 @@ const Header = () => (
     </Grid.Column>
 */
 const Header = () => (
-    <Menu 
-        borderless 
-        color="blue" 
-        inverted 
-        style={{borderRadius: "0px"}}
-    >
-        <Container >
-            <Menu.Item fitted="vertically" position="left">
-                <SiteLogo />
-            </Menu.Item>
-        
-        <NavBar />
+    <>
+        <Menu 
+            borderless 
+            color="blue" 
+            inverted 
+            style={{borderRadius: 0, margin: 0}}
+        >
+            <Container >
+                <Menu.Item fitted="vertically" position="left">
+                    <SiteLogo />
+                </Menu.Item>
+                <div className="NavBar">
+                    <Menu.Item >
+                        <NavBar />
+                    </Menu.Item>
+                </div>
 
-        <Menu.Item position="right">
-            <LoginButton />
-        </Menu.Item>
-        </Container>
-    </Menu>
+                <Menu.Item position="right">
+                    <LoginButton />
+                </Menu.Item>
+            </Container>
+        </Menu>
+
+        <div 
+            className="NBOI-container" 
+            style={{position: "sticky", top: -1, zIndex: 999}}
+        >
+            <div className="NavBarOnlyIcons" >
+                <NavBarOnlyIcons />
+            </div>
+        </div>
+    </>
 );
 
 
