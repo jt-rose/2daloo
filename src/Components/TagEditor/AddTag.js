@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Dropdown, Grid, Transition } from "semantic-ui-react";
+import { Form, Dropdown, Grid, Transition, Label } from "semantic-ui-react";
 
 import { createTag } from "../../actions";
 
@@ -62,6 +62,8 @@ class AddTag extends Component {
         };
 
     render() {
+        const tagNameAlreadyUsed = this.props.tags.some(x => x.name === this.state.name);
+
         return (
             //add container?
             <Form 
@@ -69,7 +71,11 @@ class AddTag extends Component {
             >
                 {/*<Form.Group>*/}
                 <Grid stackable columns={3}>
-
+                {tagNameAlreadyUsed && (
+                            <Label basic color="red" pointing="down">
+                                The tag name `{this.state.name}` has already been used!
+                            </Label>
+                        )}
                 <Grid.Column>
                     <Transition
                         visible={this.state.visibility}
@@ -102,7 +108,7 @@ class AddTag extends Component {
                     type="submit" 
                     content="add" 
                     color="blue"
-                    disabled={this.state.name.length === 0}
+                    disabled={this.state.name.length === 0 || tagNameAlreadyUsed}
                 />
                 </Grid.Column>
                 {/*</Form.Group>*/}
