@@ -46,7 +46,7 @@ export const toggleImportant = actionTypeObj(TOGGLE_IMPORTANT);
 
 export const toggleLogin = actionTypeObj(TOGGLE_LOGIN);
 
-const createSlug = title => 
+export const createSlug = title => 
     title.trim()
     .toLowerCase()
     .replace(/,/g, "")

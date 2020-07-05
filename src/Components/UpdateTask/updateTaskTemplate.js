@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Form, Container, Checkbox, Dropdown, Grid, TextArea, Icon } from "semantic-ui-react";
+import { 
+    Form, 
+    Container, 
+    Checkbox, 
+    Dropdown, 
+    Grid, 
+    TextArea, 
+    Icon, 
+    Label 
+} from "semantic-ui-react";
 
 import NotFound from "../NotFound";
-import { updateTask, createTask } from "../../actions";
+import { updateTask, createTask, createSlug } from "../../actions";
 
 // empty post provided when creating new posts
 const emptyPost = {
@@ -94,7 +103,15 @@ const updateTaskTemplate = (updateFormat) => {
                 .map(tag => tag.name);
             
             const { title, content } = this.state;
-            const validContent = title.length > 0 && content.length > 0;
+            const { tasks, trash } = this.props;
+
+            // check for same title used if not editing previous task
+            const titleSlug = createSlug(title);
+            const sameTitleFromEditing = titleSlug === this.task.slug;
+            const titleAlreadyUsed = !sameTitleFromEditing && 
+                ( tasks.some(x => x.slug === titleSlug) || 
+                trash.some(x => x.slug === titleSlug) );
+            const validContent = title.length > 0 && content.length > 0 && !titleAlreadyUsed;
 
             return (
                 <Container text textAlign="left">
@@ -110,6 +127,12 @@ const updateTaskTemplate = (updateFormat) => {
                             placeholder="..."
                         >
                         </input>
+                        {titleAlreadyUsed && (
+                            <Label basic color="red" pointing>
+                                The title `{this.state.title}` has already been used in another post!
+                            </Label>
+                        )}
+                        
                     </Form.Field>
 
                     <Form.Field>
@@ -197,7 +220,7 @@ const AddTaskUC = updateTaskTemplate(addTaskFormat);
 const EditTaskUC = updateTaskTemplate(editTaskFormat);
 
 // map out redux connections
-const mapStateToProps = ({ tasks, tags }) => ({ tasks, tags });
+const mapStateToProps = ({ tasks, trash, tags }) => ({ tasks, trash, tags });
 const mapDispatchToProps = dispatch => ({
     updateTask: (newTask, oldSlug) => dispatch(updateTask(newTask, oldSlug))
 });

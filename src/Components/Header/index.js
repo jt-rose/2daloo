@@ -4,73 +4,10 @@ import SiteLogo from "./SiteLogo";
 import { NavBar, NavBarOnlyIcons } from "./NavBar";
 import LoginButton from "./LoginButton";
 
-import { Menu, Container, Divider } from "semantic-ui-react";
+import { Menu, Container } from "semantic-ui-react";
 
 import "./index.css";
-/*
-const HeaderGrid = () => (
-    <Grid  fixed="top" inverted color="blue">
-        <Grid.Row>
-        <Menu borderless color="blue" inverted 
-    style={{borderRadius: "0px"}}>
-        <Container position="left">
-            <Menu.Item fitted >
-                <SiteLogo />
-            </Menu.Item>
-        
-        
-        <NavBar only="wide-screen"/>
 
-        <Menu.Item position="right">
-            <NavLink to="/login">
-                <Button>
-                    Login
-                </Button>
-            </NavLink>
-        </Menu.Item>
-        </Container>
-    </Menu>
-        </Grid.Row>
-
-        <Grid.Row only="mobile">
-            <Menu inverted color="blue">
-                <Menu.Item>
-                    <NavBar />
-                </Menu.Item>
-            </Menu>
-            
-        </Grid.Row>
-        
-    </Grid>
-)
-
-
-const Header = () => (
-    <Grid>
-        <Grid.Column color="blue" inverted>
-        <Container >
-            <Grid columns="equal" >
-    <Grid.Column fitted color="teal" inverted><SiteLogo /></Grid.Column>
-    <Grid.Column color="teal" inverted> <NavBar /></Grid.Column>
-    <Grid.Column color="teal" inverted> <SiteLogo /></Grid.Column>
-            </Grid>
-        </Container>
-        </Grid.Column>
-    </Grid>
-)
-
-<Grid.Column textAlign="center">
-        <NavBar />
-    </Grid.Column>
-
-    <Grid.Column textAlign="right">
-        <NavLink to="/login">
-                <Button >
-                    Login
-                </Button>
-            </NavLink>
-    </Grid.Column>
-*/
 const Header = () => (
     <>
         <Menu 
