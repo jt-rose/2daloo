@@ -12,7 +12,7 @@ import {
     sortTrashDate,
     sortTrashDateReverse,
 
-    toggleTagVisibility,
+    updateTagFilter,
 
     toggleImportant
 } from "../../../actions";
@@ -69,7 +69,7 @@ class SortAndFilterButtons extends Component {
                             circular: true}}
                             active={this.props.filterTags.includes(tag.name)}
                             //disabled={!this.props.filterTags.includes(tag.name)}
-                        onClick={() => this.props.toggleTagVisibility(tag.name)}
+                        onClick={() => this.props.updateTagFilter(tag.name)}
                         />
                     ))}
                     </Dropdown.Menu>
@@ -77,7 +77,7 @@ class SortAndFilterButtons extends Component {
                     <Dropdown.Divider />
                     <Dropdown.Header>Important</Dropdown.Header>
                     <Dropdown.Item onClick={this.props.toggleImportant}>
-                        {/*<Checkbox toggle />*/}
+                        {<Checkbox slider checked={this.props.filterImportant}/>}
                     </Dropdown.Item>
 
                 </Dropdown.Menu>
@@ -92,14 +92,14 @@ const mapTasksDispatch = dispatch => ({
     sortDate: () => dispatch(sortTasksDate),
     sortDateReverse: () => dispatch(sortTasksDateReverse),
     toggleImportant: () => dispatch(toggleImportant),
-    toggleTagVisibility: (tagName) => dispatch(toggleTagVisibility(tagName))
+    updateTagFilter: (tagName) => dispatch(updateTagFilter(tagName))
 });
 const mapTrashDispatch = dispatch => ({
     sortABC: () => dispatch(sortTrashABC),
     sortDate: () => dispatch(sortTrashDate),
     sortDateReverse: () => dispatch(sortTrashDateReverse),
     toggleImportant: () => dispatch(toggleImportant),
-    toggleTagVisibility: (tagName) => dispatch(toggleTagVisibility(tagName))
+    updateTagFilter: (tagName) => dispatch(updateTagFilter(tagName))
 });
 
 export const TaskSortButtons = connect(mapStateToProps, mapTasksDispatch)(SortAndFilterButtons);

@@ -1,11 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import TaskPaneButtons from "./TaskPaneButtons";
 import TrashPaneButtons from "./TrashPaneButtons";
 
 import { formatDate } from "../../actions";
 
-import { Grid, Header } from "semantic-ui-react";
+import { Grid, Header, Label } from "semantic-ui-react";
 
 
 
@@ -25,12 +26,29 @@ const taskPaneTemplate = (ButtonType) => (props) => (
             <Grid.Row textAlign="center">
             <Header as="h3">{props.task.content}</Header>
             </Grid.Row>
+            {props.showTags && props.task.tags.length > 0 && (
+                <Grid.Row>
+                    {props.task.tags.map( tag => (
+                        <Grid.Column>
+                            <Label 
+                                tag 
+                                color={props.tags.find( tagObj => tagObj.name === tag).color}
+                            >
+                                {tag}
+                            </Label>
+                        </Grid.Column>
+                    ))}
+                </Grid.Row>
+            )}
         </Grid>
 </article>
 )
 
-const TaskPane = taskPaneTemplate(TaskPaneButtons);
-const TrashPane = taskPaneTemplate(TrashPaneButtons);
+const mapStateToProps = ({ tags, showTags }) => ({ tags, showTags });
+const reduxConnect = connect(mapStateToProps, null);
+
+const TaskPane = reduxConnect(taskPaneTemplate(TaskPaneButtons));
+const TrashPane = reduxConnect(taskPaneTemplate(TrashPaneButtons));
 
 export {
     TaskPane,

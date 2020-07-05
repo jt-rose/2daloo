@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 import { List, Icon } from "semantic-ui-react";
 import {
     restoreTrash,
-    removeTrash
+    removeTrash,
+    toggleTagVisibility
 } from "../../actions";
 
 const TrashButtonsUC = (props) => (
     <List>
         <Icon link name="undo" circular color="orange" inverted 
         onClick={() => props.restoreTrash(props.task)}/>
-        <Icon link name="tag" circular color="teal" inverted />
+        <Icon link name="tag" circular color={props.showTags ? "teal" : "grey"} inverted 
+        onClick={props.toggleTagVisibility}/>
         <Icon link name="eraser" circular color="red" inverted 
             onClick={() => props.removeTrash(props.task)}
         />
@@ -43,12 +45,13 @@ const trashButtonsTemplate = (buttonTemplate) =>(props)=> (
 )*/
 
 //const TrashButtonsUC = trashButtonsTemplate(trashButtonsSettings);
-
+const mapStateToProps = ({ showTags }) => ({ showTags });
 const mapDispatchToProps = dispatch => ({
     restoreTrash: task => dispatch(restoreTrash(task)),
-    removeTrash: task => dispatch(removeTrash(task))
+    removeTrash: task => dispatch(removeTrash(task)),
+    toggleTagVisibility: () => dispatch(toggleTagVisibility)
 });
 
-const TrashButtons = connect(null, mapDispatchToProps)(TrashButtonsUC);
+const TrashButtons = connect(mapStateToProps, mapDispatchToProps)(TrashButtonsUC);
 
 export default TrashButtons;

@@ -2,9 +2,6 @@
 
 export const UPDATE_TASK = "UPDATE_TASK";
 export const REMOVE_TASK = "REMOVE_TASK";
-//export const ADD_CATEGORY = "ADD_CATEGORY";
-//export const REMOVE_CATEGORY = "REMOVE_CATEGORY";
-//export const SET_IMPORTANCE = "SET_IMPORTANCE";
 
 export const SORT_TASKS_ABC = "SORT_TASKS_ABC";
 export const SORT_TASKS_ABC_REVERSE = "SORT_TASKS_ABC_REVERSE";
@@ -25,6 +22,8 @@ export const REMOVE_TAG = "REMOVE_TAG";
 
 export const TOGGLE_IMPORTANT = "TOGGLE_IMPORTANT";
 
+export const UPDATE_TAG_FILTER = "UPDATE_TAG_FILTER";
+
 export const TOGGLE_TAG_VISIBILITY = "TOGGLE_TAG_VISIBILITY";
 
 export const TOGGLE_LOGIN = "TOGGLE_LOGIN";
@@ -43,7 +42,7 @@ export const sortTrashDate = actionTypeObj(SORT_TRASH_DATE);
 export const sortTrashDateReverse = actionTypeObj(SORT_TRASH_DATE_REVERSE);
 
 export const toggleImportant = actionTypeObj(TOGGLE_IMPORTANT);
-
+export const toggleTagVisibility = actionTypeObj(TOGGLE_TAG_VISIBILITY);
 export const toggleLogin = actionTypeObj(TOGGLE_LOGIN);
 
 export const createSlug = title => 
@@ -140,7 +139,7 @@ export const removeTag = (tag) => ({
     tag
 });
 
-export const toggleTagVisibility = (tagName) => ({
-    type: TOGGLE_TAG_VISIBILITY,
+export const updateTagFilter = (tagName) => ({
+    type: UPDATE_TAG_FILTER,
     tagName
 });

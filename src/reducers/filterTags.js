@@ -1,9 +1,9 @@
-import { TOGGLE_TAG_VISIBILITY } from "../actions";
+import { UPDATE_TAG_FILTER } from "../actions";
 
 
 const filterTags = (state=[], action) => {
     switch(action.type) {
-        case TOGGLE_TAG_VISIBILITY:
+        case UPDATE_TAG_FILTER:
             const currentlyListed = state.find(x => x === action.tagName);
             if (currentlyListed) {
                 return state.filter(x => x !== action.tagName)
