@@ -125,7 +125,7 @@ export function restoreTrash(task) {
     return function(dispatch) {
         dispatch(removeTrash(task));
         dispatch(updateTask(task))
-    }//check if new task created first
+    }
 };
 
 

@@ -46,7 +46,6 @@ const editTaskFormat = {
 }
 
 
-//test out isolated class
 const updateTaskTemplate = (updateFormat) => {
     return class extends Component {
         constructor(props) {
@@ -159,7 +158,6 @@ const updateTaskTemplate = (updateFormat) => {
                                 onClick={this.updateImportant}/>
                         <Checkbox 
                             slider
-                            //label="Important"
                             checked={this.state.important}
                             onChange={this.updateImportant}
                             />
@@ -175,7 +173,6 @@ const updateTaskTemplate = (updateFormat) => {
                             multiple
                             selection
                             style={{minWidth: "7em"}}
-                            //closeOnChange={false}
                         >
                             <Dropdown.Menu>
                                 {tagNames.map(tag => (

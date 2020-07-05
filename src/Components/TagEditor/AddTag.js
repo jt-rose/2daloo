@@ -65,11 +65,9 @@ class AddTag extends Component {
         const tagNameAlreadyUsed = this.props.tags.some(x => x.name === this.state.name);
 
         return (
-            //add container?
             <Form 
                 onSubmit={this.onSubmit}
             >
-                {/*<Form.Group>*/}
                 <Grid stackable columns={3}>
                 {tagNameAlreadyUsed && (
                             <Label basic color="red" pointing="down">
@@ -111,7 +109,6 @@ class AddTag extends Component {
                     disabled={this.state.name.length === 0 || tagNameAlreadyUsed}
                 />
                 </Grid.Column>
-                {/*</Form.Group>*/}
                 </Grid>
             </Form>
         )

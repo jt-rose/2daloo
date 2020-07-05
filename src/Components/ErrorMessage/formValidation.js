@@ -1,34 +1,3 @@
-import React from "react";
-import { Message } from "semantic-ui-react";
-
-const TitleLengthErrorMessage = () => (
-    <Message 
-        header="Uh Oh!"
-        content="Please make sure your task title is between 1 and 50 characters long"
-    />
-);
-
-const ContentLengthErrorMessage = () => (
-    <Message 
-        header="Uh Oh!"
-        content="Please make sure your task message is between 1 and 300 characters long"
-    />
-);
-
-const TagLengthErrorMessage = () => (
-    <Message 
-        header="Uh Oh!"
-        content="Please make sure your tag name is between 1 and 25 characters long"
-    />
-);
-
-const TagDescriptionLengthErrorMessage = () => (
-    <Message 
-        header="Uh Oh!"
-        content="Please make sure your tag description is between 1 and 25 characters long"
-    />
-);
-
 const correctLength = (max, min=0) => (text) => {
     const textLength = text.length;
     return textLength >= min && textLength <= max;

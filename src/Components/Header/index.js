@@ -43,19 +43,4 @@ const Header = () => (
     </>
 );
 
-
-/*
-const Header2 = () => (
-    <header>
-        <Menu fixed="top" inverted>
-            <Container>
-                <Menu.Item as="a" header>
-                    2daloo
-                </Menu.Item>
-            </Container>
-
-        </Menu>
-    </header>
-)
-*/
 export default Header;

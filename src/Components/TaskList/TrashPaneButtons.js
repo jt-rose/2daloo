@@ -19,32 +19,6 @@ const TrashButtonsUC = (props) => (
     </List>
 );
 
-
-const trashButtonsSettings = {
-    firstIcon: "undo",
-    firstName: "Restore",
-    lastIcon: "eraser",
-    lastName: "Banish"
-}
-/*
-const trashButtonsTemplate = (buttonTemplate) =>(props)=> (
-    <Button.Group compact>
-        <Button onClick={() => props.restoreTrash(props.task)}>
-            <Icon name={buttonTemplate.firstIcon} />
-            {buttonTemplate.firstName}
-        </Button>
-        <Button>
-            <Icon name="tag" />
-            Tags
-        </Button>
-        <Button onClick={() => props.removeTrash(props.task)}>
-            <Icon name={buttonTemplate.lastIcon} />
-            {buttonTemplate.lastName}
-        </Button>
-    </Button.Group>
-)*/
-
-//const TrashButtonsUC = trashButtonsTemplate(trashButtonsSettings);
 const mapStateToProps = ({ showTags }) => ({ showTags });
 const mapDispatchToProps = dispatch => ({
     restoreTrash: task => dispatch(restoreTrash(task)),
