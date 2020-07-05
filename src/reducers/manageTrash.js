@@ -6,7 +6,7 @@ import {
     SORT_TRASH_DATE,
     SORT_TRASH_DATE_REVERSE 
 } from "../actions";
-import * as R from "ramda";
+import {sort as Rsort } from "ramda";
 
 const initialState = [
     {
@@ -42,13 +42,13 @@ const manageTrash = (state=initialState, action) => {
         case REMOVE_TRASH:
             return state.filter(x => x.slug !== action.task.slug);
         case SORT_TRASH_ABC:
-            return R.sort((a, b) => a.title.localeCompare(b.title), state);
+            return Rsort((a, b) => a.title.localeCompare(b.title), state);
         case SORT_TRASH_ABC_REVERSE:
-            return R.sort((a, b) => b.title.localeCompare(a.title), state);
+            return Rsort((a, b) => b.title.localeCompare(a.title), state);
         case SORT_TRASH_DATE:
-            return R.sort((a, b) => b.created - a.created, state);
+            return Rsort((a, b) => b.created - a.created, state);
         case SORT_TRASH_DATE_REVERSE:
-            return R.sort((a, b) => a.created - b.created, state);
+            return Rsort((a, b) => a.created - b.created, state);
         default:
             return state;
     };

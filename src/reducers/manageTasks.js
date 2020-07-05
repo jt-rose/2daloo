@@ -6,7 +6,7 @@ import {
     SORT_TASKS_DATE,
     SORT_TASKS_DATE_REVERSE
 } from "../actions";
-import * as R from "ramda";
+import { sort as Rsort } from "ramda";
 /*
 const immReverse = (arr, newArr=[]) => {
     if (arr.length === 0) {
@@ -72,13 +72,13 @@ const manageTasks = (state=initialState, action) => {
         case REMOVE_TASK:
             return state.filter(x => x.slug !== action.task.slug);
         case SORT_TASKS_ABC:
-            return R.sort((a, b) => a.title.localeCompare(b.title), state);
+            return Rsort((a, b) => a.title.localeCompare(b.title), state);
         case SORT_TASKS_ABC_REVERSE:
-            return R.sort((a, b) => b.title.localeCompare(a.title), state);
+            return Rsort((a, b) => b.title.localeCompare(a.title), state);
         case SORT_TASKS_DATE:
-            return R.sort((a, b) => b.created - a.created, state);
+            return Rsort((a, b) => b.created - a.created, state);
         case SORT_TASKS_DATE_REVERSE:
-            return R.sort((a, b) => a.created - b.created, state);
+            return Rsort((a, b) => a.created - b.created, state);
         default:
             return state;
     }
