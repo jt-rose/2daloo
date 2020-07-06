@@ -63,6 +63,7 @@ const updateTaskTemplate = (updateFormat) => {
         content: this.task.content,
         tags: this.task.tags,
         important: this.task.important,
+        showTagLimit: false,
         redirect: false
       };
       this.updateTitle = this.updateTitle.bind(this);
@@ -75,11 +76,15 @@ const updateTaskTemplate = (updateFormat) => {
     updateTitle = (e) => this.setState({ title: e.target.value });
     updateContent = (e) => this.setState({ content: e.target.value });
     updateTags = (currentTag) => {
-      if (this.state.tags.includes(currentTag)) {
+      const tagNames = this.state.tags.map((tag) => tag.name);
+
+      if (tagNames.includes(currentTag.name)) {
         const updatedTags = this.state.tags.filter(
-          (tag) => tag !== currentTag
+          (tag) => tag.name !== currentTag.name
         );
-        this.setState({ tags: updatedTags });
+        this.setState({ tags: updatedTags, showTagLimit: false });
+      } else if (this.state.tags.length === 3) {
+        this.setState({ showTagLimit: true });
       } else {
         const updatedTags = [...this.state.tags, currentTag];
         this.setState({ tags: updatedTags });
@@ -175,13 +180,15 @@ const updateTaskTemplate = (updateFormat) => {
 
               <Grid.Column />
 
-              <Grid.Column>
+              <Grid.Column textAlign="right">
                 <Form.Field>
                   <Dropdown
-                    placeholder="tags"
+                    text="Tags"
                     multiple
-                    selection
-                    style={{ minWidth: '7em' }}
+                    scrolling
+                    simple
+                    basic
+                    style={{ minWidth: '7em', fontSize: '1.2em' }}
                   >
                     <Dropdown.Menu>
                       {tags.map((tag) => (
@@ -195,7 +202,9 @@ const updateTaskTemplate = (updateFormat) => {
                             circular: true
                           }}
                           onClick={() => this.updateTags(tag)}
-                          active={this.state.tags.includes(tag)}
+                          active={this.state.tags.some(
+                            (item) => item.name === tag.name
+                          )}
                         />
                       ))}
                     </Dropdown.Menu>
@@ -203,6 +212,15 @@ const updateTaskTemplate = (updateFormat) => {
                 </Form.Field>
               </Grid.Column>
             </Grid>
+            {this.state.showTagLimit && (
+              <div
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
+                <Label basic color="red">
+                  Only 3 tags may be applied per task!
+                </Label>
+              </div>
+            )}
             {this.state.tags.length > 0 && (
               <Container
                 textAlign="center"

@@ -16,7 +16,7 @@ const initialState = [
       'Material UI is another excellent choice for a UI library, but some key features of Semantic UI, such as the included icon sets and nicely designed accordion, made that the preferable choice.',
     created: new Date('2020-05-20T17:35:21.449Z'),
     slug: 'material-ui',
-    tags: ['UI-library'],
+    tags: [{ name: 'UI-library', color: 'blue' }],
     important: false
   },
   {
@@ -25,7 +25,7 @@ const initialState = [
       'Bootstrap was considered, but the clean aesthetic of semantic UI won out',
     created: new Date('2020-04-18T17:37:46.248Z'),
     slug: 'react-bootstrap',
-    tags: ['UI-library'],
+    tags: [{ name: 'UI-library', color: 'blue' }],
     important: false
   }
 ];

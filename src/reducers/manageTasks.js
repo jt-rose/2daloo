@@ -24,7 +24,7 @@ const initialState = [
       'Use Redux to manage state decoupled from components, avoiding the need for prop drilling',
     created: new Date('2020-02-28T17:37:46.248Z'),
     slug: 'connect-to-redux',
-    tags: ['redux'],
+    tags: [{ name: 'redux', color: 'red' }],
     important: true
   },
   {
@@ -43,7 +43,7 @@ const initialState = [
       'Utilize Semantic UI to efficiently create clean, stylized views and allow developers to focus on core application logic',
     created: new Date('2020-02-20T17:35:21.449Z'),
     slug: 'semantic-ui',
-    tags: ['UI-library'],
+    tags: [{ name: 'UI-library', color: 'blue' }],
     important: false
   },
   {
@@ -52,7 +52,7 @@ const initialState = [
       'Use various redux tooling, such as devtools extension and redux thunk, to expand upon core redux functionality',
     created: new Date('2020-02-18T17:37:46.248Z'),
     slug: 'redux-tooling',
-    tags: ['redux'],
+    tags: [{ name: 'redux', color: 'red' }],
     important: false
   }
 ];

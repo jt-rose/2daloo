@@ -26,14 +26,8 @@ const taskPaneTemplate = (ButtonType) => (props) => (
         <Grid.Row>
           {props.task.tags.map((tag) => (
             <Grid.Column>
-              <Label
-                tag
-                color={
-                  props.tags.find((tagObj) => tagObj.name === tag)
-                    .color
-                }
-              >
-                {tag}
+              <Label tag color={tag.color}>
+                {tag.name}
               </Label>
             </Grid.Column>
           ))}
