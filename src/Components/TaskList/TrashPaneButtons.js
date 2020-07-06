@@ -8,9 +8,10 @@ import {
 } from '../../actions';
 
 const TrashButtonsUC = (props) => (
-  <List>
+  <List key="trash-button-list">
     <Icon
       link
+      key="trash-buttons-undo"
       name="undo"
       circular
       color="orange"
@@ -19,6 +20,7 @@ const TrashButtonsUC = (props) => (
     />
     <Icon
       link
+      key="trash-buttons-tag"
       name="tag"
       circular
       color={props.showTags ? 'teal' : 'grey'}
@@ -27,6 +29,7 @@ const TrashButtonsUC = (props) => (
     />
     <Icon
       link
+      key="trah-buttons-eraser"
       name="eraser"
       circular
       color="red"

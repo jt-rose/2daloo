@@ -13,7 +13,7 @@ const initialState = [
     title: 'React Architecture',
     content:
       'Use React for declarative, component-based architecture with JSX',
-    created: new Date('2020-02-18T17:37:46.248Z'),
+    created: new Date('2020-02-29T17:37:46.248Z'),
     slug: 'react-architecture',
     tags: [],
     important: true
@@ -22,7 +22,7 @@ const initialState = [
     title: 'Connect to Redux',
     content:
       'Use Redux to manage state decoupled from components, avoiding the need for prop drilling',
-    created: new Date('2020-02-20T17:35:21.449Z'),
+    created: new Date('2020-02-28T17:37:46.248Z'),
     slug: 'connect-to-redux',
     tags: ['redux'],
     important: true
@@ -41,7 +41,7 @@ const initialState = [
     title: 'Semantic UI',
     content:
       'Utilize Semantic UI to efficiently create clean, stylized views and allow developers to focus on core application logic',
-    created: new Date('2020-02-28T17:37:46.248Z'),
+    created: new Date('2020-02-20T17:35:21.449Z'),
     slug: 'semantic-ui',
     tags: ['UI-library'],
     important: false
@@ -50,7 +50,7 @@ const initialState = [
     title: 'Redux Tooling',
     content:
       'Use various redux tooling, such as devtools extension and redux thunk, to expand upon core redux functionality',
-    created: new Date('2020-02-29T17:37:46.248Z'),
+    created: new Date('2020-02-18T17:37:46.248Z'),
     slug: 'redux-tooling',
     tags: ['redux'],
     important: false

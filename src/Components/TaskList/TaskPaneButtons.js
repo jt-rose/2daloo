@@ -5,10 +5,11 @@ import { Icon, List } from 'semantic-ui-react';
 import { moveToTrash, toggleTagVisibility } from '../../actions';
 
 const TaskButtonsUC = (props) => (
-  <List>
+  <List key="task-button-list">
     <NavLink to={`/edit/${props.task.slug}`}>
       <Icon
         link
+        key="task-buttons-edit"
         name="edit outline"
         circular
         color="orange"
@@ -17,6 +18,7 @@ const TaskButtonsUC = (props) => (
     </NavLink>
     <Icon
       link
+      key="task-buttons-tag"
       name="tag"
       circular
       color={props.showTags ? 'teal' : 'grey'}
@@ -25,6 +27,7 @@ const TaskButtonsUC = (props) => (
     />
     <Icon
       link
+      key="task-buttons-delete"
       name="delete"
       circular
       color="red"

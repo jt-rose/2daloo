@@ -87,10 +87,9 @@ const listTemplate = (listType) => {
             {/*<Accordion defaultActiveIndex={0} styled={true} panels={panels} />*/}
             <Accordion styled inverted fluid>
               {panels.map((panel, i) => (
-                <>
+                <div key={`panel-for-${panel.title}`}>
                   <Accordion.Title
                     style={{ backgroundColor: '#2185d0' }}
-                    styled={true}
                     active={activeIndex === i}
                     index={i}
                     onClick={this.handleClick}
@@ -119,7 +118,7 @@ const listTemplate = (listType) => {
                   <Accordion.Content active={activeIndex === i}>
                     {panel.content.content}
                   </Accordion.Content>
-                </>
+                </div>
               ))}
             </Accordion>
           </Container>

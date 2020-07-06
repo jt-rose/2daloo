@@ -28,7 +28,10 @@ const headerLinks = [
 export const NavBar = () => (
   <Menu icon="labeled" secondary>
     {headerLinks.map((hLink) => (
-      <NavLink to={hLink.navLinkURL}>
+      <NavLink
+        to={hLink.navLinkURL}
+        key={`main-navbar-${hLink.iconName}`}
+      >
         <Menu.Item name={hLink.iconName} link>
           <Icon name={hLink.iconName} />
           {hLink.labelName}
@@ -53,7 +56,10 @@ export const NavBarOnlyIcons = () => (
     style={navBarOnlyIconsStyling}
   >
     {headerLinks.map((hLink) => (
-      <NavLink to={hLink.navLinkURL}>
+      <NavLink
+        to={hLink.navLinkURL}
+        key={`mobile-navbar-${hLink.iconName}`}
+      >
         <Menu.Item name={hLink.iconName} link>
           <Icon
             style={{ color: '#ffffff' }}
