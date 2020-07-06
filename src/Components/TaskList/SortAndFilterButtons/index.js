@@ -1,14 +1,7 @@
 // show abc sort, date sort, important filter, category filter
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Button,
-  Icon,
-  Dropdown,
-  Menu,
-  Checkbox,
-  Label
-} from 'semantic-ui-react';
+import { Dropdown, Checkbox } from 'semantic-ui-react';
 
 import {
   sortByNewest,
@@ -60,25 +53,26 @@ class SortAndFilterButtons extends Component {
             text="Tag groups"
             onClick={this.props.sortByTags}
           />
-
-          <Dropdown.Menu scrolling>
-            <Dropdown.Header>Filter Tags</Dropdown.Header>
-            {this.props.tags.map((tag) => (
-              <Dropdown.Item
-                key={tag.name}
-                value={tag.name}
-                text={tag.name}
-                label={{
-                  color: tag.color,
-                  empty: true,
-                  circular: true
-                }}
-                active={this.props.filterTags.includes(tag.name)}
-                //disabled={!this.props.filterTags.includes(tag.name)}
-                onClick={() => this.props.updateTagFilter(tag.name)}
-              />
-            ))}
-          </Dropdown.Menu>
+          {this.props.tags.length > 0 && (
+            <Dropdown.Menu scrolling>
+              <Dropdown.Header>Filter Tags</Dropdown.Header>
+              {this.props.tags.map((tag) => (
+                <Dropdown.Item
+                  key={tag.name}
+                  value={tag.name}
+                  text={tag.name}
+                  label={{
+                    color: tag.color,
+                    empty: true,
+                    circular: true
+                  }}
+                  active={this.props.filterTags.includes(tag.name)}
+                  //disabled={!this.props.filterTags.includes(tag.name)}
+                  onClick={() => this.props.updateTagFilter(tag.name)}
+                />
+              ))}
+            </Dropdown.Menu>
+          )}
 
           <Dropdown.Divider />
           <Dropdown.Header>Important</Dropdown.Header>

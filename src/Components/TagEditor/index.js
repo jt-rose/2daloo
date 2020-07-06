@@ -37,15 +37,16 @@ const TagEditor = (props) => (
             link
             name="x"
             size="big"
-            //color="grey"
-            className="remove-icon" //"grey"
+            className="remove-icon"
             onClick={() => props.removeTag(tag)}
           />
         </div>
       </Grid.Row>
     ))}
     <Grid.Row>
-      <Divider horizontal>Add New Tag</Divider>
+      <Divider horizontal>
+        <div style={{ color: '#2185d0' }}>Add New Tag</div>
+      </Divider>
     </Grid.Row>
 
     <Grid.Row>

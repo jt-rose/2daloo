@@ -125,7 +125,9 @@ const updateTaskTemplate = (updateFormat) => {
             title={updateFormat.pageTitle}
           >
             <Form.Field>
-              <label>Title</label>
+              <label style={{ color: '#2185d0', fontSize: '1.2em' }}>
+                Title
+              </label>
               <input
                 onChange={this.updateTitle}
                 value={this.state.title}
@@ -140,7 +142,9 @@ const updateTaskTemplate = (updateFormat) => {
             </Form.Field>
 
             <Form.Field>
-              <label>Content</label>
+              <label style={{ color: '#2185d0', fontSize: '1.2em' }}>
+                Content
+              </label>
               <TextArea
                 placeholder="..."
                 rows={4}
