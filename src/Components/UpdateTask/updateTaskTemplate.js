@@ -203,6 +203,28 @@ const updateTaskTemplate = (updateFormat) => {
                 </Form.Field>
               </Grid.Column>
             </Grid>
+            {this.state.tags.length > 0 && (
+              <Container
+                textAlign="center"
+                //style={{ paddingTop: '1em' }}
+              >
+                {this.state.tags.map((tag) => (
+                  <Label
+                    color={tag.color}
+                    tag
+                    style={{
+                      minWidth: '8em',
+                      margin: '1em 1em 0em 1em'
+                    }}
+                    size="big"
+                  >
+                    <div style={{ textAlign: 'center' }}>
+                      {tag.name}
+                    </div>
+                  </Label>
+                ))}
+              </Container>
+            )}
 
             <Container textAlign="center">
               <br />
