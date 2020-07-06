@@ -4,12 +4,15 @@ import {
   Label,
   Button,
   Divider,
-  Grid
+  Grid,
+  Icon
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import { removeTag } from '../../actions';
 import AddTag from './AddTag';
+
+import './index.css';
 
 const TagEditor = (props) => (
   <Grid centered container>
@@ -29,11 +32,16 @@ const TagEditor = (props) => (
         >
           <div style={{ textAlign: 'center' }}>{tag.name}</div>
         </Label>
-        <Button
-          icon="x"
-          color="red"
-          onClick={() => props.removeTag(tag)}
-        />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Icon
+            link
+            name="x"
+            size="big"
+            //color="grey"
+            className="remove-icon" //"grey"
+            onClick={() => props.removeTag(tag)}
+          />
+        </div>
       </Grid.Row>
     ))}
     <Grid.Row>

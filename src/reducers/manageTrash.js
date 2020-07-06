@@ -2,13 +2,13 @@ import { UPDATE_TRASH, REMOVE_TRASH } from '../actions';
 
 const initialState = [
   {
-    title: 'React-Bootstrap',
+    title: 'Node, Express, and MongoDB',
     content:
-      'Bootstrap was considered, but the clean aesthetic of semantic UI won out',
-    created: new Date('2020-04-18T17:37:46.248Z'),
-    slug: 'react-bootstrap',
-    tags: ['UI-library'],
-    important: false
+      'In a full-scale app these would be essential, but this app is focused on front-end, so redux is handling the data in a nonpermanent way. These may be incorporated if I refactor this to a full stack project later on.',
+    created: new Date('2020-06-21T17:37:46.248Z'),
+    slug: 'node-express-and-mongodb',
+    tags: [],
+    important: true
   },
   {
     title: 'Material UI',
@@ -20,13 +20,13 @@ const initialState = [
     important: false
   },
   {
-    title: 'Node, Express, and MongoDB',
+    title: 'React-Bootstrap',
     content:
-      'In a full-scale app these would be essential, but this app is focused on front-end, so redux is handling the data in a nonpermanent way. These may be incorporated if I refactor this to a full stack project later on.',
-    created: new Date('2020-06-21T17:37:46.248Z'),
-    slug: 'node-express-and-mongodb',
-    tags: [],
-    important: true
+      'Bootstrap was considered, but the clean aesthetic of semantic UI won out',
+    created: new Date('2020-04-18T17:37:46.248Z'),
+    slug: 'react-bootstrap',
+    tags: ['UI-library'],
+    important: false
   }
 ];
 
