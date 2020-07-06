@@ -11,12 +11,10 @@ import {
 } from 'semantic-ui-react';
 
 import {
-  sortTasksABC,
-  sortTasksDate,
-  sortTasksDateReverse,
-  sortTrashABC,
-  sortTrashDate,
-  sortTrashDateReverse,
+  sortByNewest,
+  sortByOldest,
+  sortByABC,
+  sortByTags,
   updateTagFilter,
   toggleImportant
 } from '../../../actions';
@@ -45,17 +43,22 @@ class SortAndFilterButtons extends Component {
           <Dropdown.Item
             icon="sort alphabet down"
             text="A to Z"
-            onClick={this.props.sortABC}
+            onClick={this.props.sortByABC}
           />
           <Dropdown.Item
             icon="sort numeric down"
             text="Newest"
-            onClick={this.props.sortDate}
+            onClick={this.props.sortByNewest}
           />
           <Dropdown.Item
             icon="sort numeric up"
             text="Oldest"
-            onClick={this.props.sortDateReverse}
+            onClick={this.props.sortByOldest}
+          />
+          <Dropdown.Item
+            icon="tags"
+            text="Tag groups"
+            onClick={this.props.sortByTags}
           />
 
           <Dropdown.Menu scrolling>
@@ -93,26 +96,20 @@ const mapStateToProps = ({ tags, filterImportant, filterTags }) => ({
   filterImportant,
   filterTags
 });
-const mapTasksDispatch = (dispatch) => ({
-  sortABC: () => dispatch(sortTasksABC),
-  sortDate: () => dispatch(sortTasksDate),
-  sortDateReverse: () => dispatch(sortTasksDateReverse),
-  toggleImportant: () => dispatch(toggleImportant),
-  updateTagFilter: (tagName) => dispatch(updateTagFilter(tagName))
-});
-const mapTrashDispatch = (dispatch) => ({
-  sortABC: () => dispatch(sortTrashABC),
-  sortDate: () => dispatch(sortTrashDate),
-  sortDateReverse: () => dispatch(sortTrashDateReverse),
+const mapDispatchToProps = (dispatch) => ({
+  sortByABC: () => dispatch(sortByABC),
+  sortByNewest: () => dispatch(sortByNewest),
+  sortByOldest: () => dispatch(sortByOldest),
+  sortByTags: () => dispatch(sortByTags),
   toggleImportant: () => dispatch(toggleImportant),
   updateTagFilter: (tagName) => dispatch(updateTagFilter(tagName))
 });
 
 export const TaskSortButtons = connect(
   mapStateToProps,
-  mapTasksDispatch
+  mapDispatchToProps
 )(SortAndFilterButtons);
 export const TrashSortButtons = connect(
   mapStateToProps,
-  mapTrashDispatch
+  mapDispatchToProps
 )(SortAndFilterButtons);

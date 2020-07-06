@@ -1,20 +1,14 @@
 // Action Types
+export const SORT_BY_NEWEST = 'SORT_BY_NEWEST';
+export const SORT_BY_OLDEST = 'SORT_BY_OLDEST';
+export const SORT_BY_ABC = 'SORT_BY_ABC';
+export const SORT_BY_TAGS = 'SORT_BY_TAGS';
 
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
 
-export const SORT_TASKS_ABC = 'SORT_TASKS_ABC';
-export const SORT_TASKS_ABC_REVERSE = 'SORT_TASKS_ABC_REVERSE';
-export const SORT_TASKS_DATE = 'SORT_TASKS_DATE';
-export const SORT_TASKS_DATE_REVERSE = 'SORT_TASKS_DATE_REVERSE';
-
 export const UPDATE_TRASH = 'UPDATE_TRASH';
 export const REMOVE_TRASH = 'REMOVE_TRASH';
-
-export const SORT_TRASH_ABC = 'SORT_TRASH_ABC';
-export const SORT_TRASH_ABC_REVERSE = 'SORT_TRASH_ABC_REVERSE';
-export const SORT_TRASH_DATE = 'SORT_TRASH_DATE';
-export const SORT_TRASH_DATE_REVERSE = 'SORT_TRASH_DATE_REVERSE';
 
 export const CREATE_TAG = 'CREATE_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
@@ -30,23 +24,10 @@ export const TOGGLE_LOGIN = 'TOGGLE_LOGIN';
 // Action Creators
 
 const actionTypeObj = (typeDesc) => ({ type: typeDesc });
-export const sortTasksABC = actionTypeObj(SORT_TASKS_ABC);
-export const sortTasksABCReverse = actionTypeObj(
-  SORT_TASKS_ABC_REVERSE
-);
-export const sortTasksDate = actionTypeObj(SORT_TASKS_DATE);
-export const sortTasksDateReverse = actionTypeObj(
-  SORT_TASKS_DATE_REVERSE
-);
-
-export const sortTrashABC = actionTypeObj(SORT_TRASH_ABC);
-export const sortTrashABCReverse = actionTypeObj(
-  SORT_TRASH_ABC_REVERSE
-);
-export const sortTrashDate = actionTypeObj(SORT_TRASH_DATE);
-export const sortTrashDateReverse = actionTypeObj(
-  SORT_TRASH_DATE_REVERSE
-);
+export const sortByNewest = actionTypeObj(SORT_BY_NEWEST);
+export const sortByOldest = actionTypeObj(SORT_BY_OLDEST);
+export const sortByABC = actionTypeObj(SORT_BY_ABC);
+export const sortByTags = actionTypeObj(SORT_BY_TAGS);
 
 export const toggleImportant = actionTypeObj(TOGGLE_IMPORTANT);
 export const toggleTagVisibility = actionTypeObj(

@@ -3,6 +3,7 @@ import manageTrash from './manageTrash';
 import manageTags from './manageTags';
 import filterImportant from './filterImportant';
 import filterTags from './filterTags';
+import sortOptions from './sortOptions';
 import showTags from './showTags';
 import loggedIn from './manageLogin';
 
@@ -14,6 +15,7 @@ export default combineReducers({
   tags: manageTags,
   filterImportant,
   filterTags,
+  sortOptions,
   showTags,
   loggedIn
 });

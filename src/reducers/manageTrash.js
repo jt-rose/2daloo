@@ -1,12 +1,4 @@
-import {
-  UPDATE_TRASH,
-  REMOVE_TRASH,
-  SORT_TRASH_ABC,
-  SORT_TRASH_ABC_REVERSE,
-  SORT_TRASH_DATE,
-  SORT_TRASH_DATE_REVERSE
-} from '../actions';
-import { sort as Rsort } from 'ramda';
+import { UPDATE_TRASH, REMOVE_TRASH } from '../actions';
 
 const initialState = [
   {
@@ -44,14 +36,6 @@ const manageTrash = (state = initialState, action) => {
       return state.concat(action.task);
     case REMOVE_TRASH:
       return state.filter((x) => x.slug !== action.task.slug);
-    case SORT_TRASH_ABC:
-      return Rsort((a, b) => a.title.localeCompare(b.title), state);
-    case SORT_TRASH_ABC_REVERSE:
-      return Rsort((a, b) => b.title.localeCompare(a.title), state);
-    case SORT_TRASH_DATE:
-      return Rsort((a, b) => b.created - a.created, state);
-    case SORT_TRASH_DATE_REVERSE:
-      return Rsort((a, b) => a.created - b.created, state);
     default:
       return state;
   }

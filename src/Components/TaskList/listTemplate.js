@@ -10,6 +10,7 @@ import { TaskPane, TrashPane } from './taskPaneTemplate';
 import { connect } from 'react-redux';
 
 import { filterVisibility } from '../../actions';
+import applySorting from '../../actions/sortUtils';
 
 import {
   TaskSortButtons,
@@ -41,12 +42,24 @@ const listTemplate = (listType) => {
     };
 
     render() {
-      const { tasks, filterImportant, filterTags } = this.props;
-      const panels = filterVisibility(
+      const {
+        tasks,
+        tags,
+        filterImportant,
+        filterTags,
+        sortOptions
+      } = this.props;
+      const filteredTasks = filterVisibility(
         tasks,
         filterImportant,
         filterTags
-      ).map((task) => ({
+      );
+      const sortedTasks = applySorting(
+        filteredTasks,
+        tags,
+        sortOptions
+      );
+      const panels = sortedTasks.map((task) => ({
         key: task.slug,
         title: task.title,
         important: task.important,
@@ -116,15 +129,31 @@ const listTemplate = (listType) => {
   };
 };
 
-const mapTasksState = ({ tasks, filterImportant, filterTags }) => ({
+const mapTasksState = ({
   tasks,
+  tags,
   filterImportant,
-  filterTags
+  filterTags,
+  sortOptions
+}) => ({
+  tasks,
+  tags,
+  filterImportant,
+  filterTags,
+  sortOptions
 });
-const mapTrashState = ({ trash, filterImportant, filterTags }) => ({
-  tasks: trash,
+const mapTrashState = ({
+  trash,
+  tags,
   filterImportant,
-  filterTags
+  filterTags,
+  sortOptions
+}) => ({
+  tasks: trash,
+  tags,
+  filterImportant,
+  filterTags,
+  sortOptions
 });
 
 export const TaskList = connect(
