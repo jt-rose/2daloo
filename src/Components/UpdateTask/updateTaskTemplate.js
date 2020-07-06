@@ -103,7 +103,7 @@ const updateTaskTemplate = (updateFormat) => {
         return <NotFound />;
       }
 
-      const tagNames = this.props.tags.map((tag) => tag.name);
+      const tags = this.props.tags;
 
       const { title, content } = this.state;
       const { tasks, trash } = this.props;
@@ -184,11 +184,16 @@ const updateTaskTemplate = (updateFormat) => {
                     style={{ minWidth: '7em' }}
                   >
                     <Dropdown.Menu>
-                      {tagNames.map((tag) => (
+                      {tags.map((tag) => (
                         <Dropdown.Item
-                          key={tag}
-                          text={tag}
-                          value={tag}
+                          key={tag.name}
+                          text={tag.name}
+                          value={tag.name}
+                          label={{
+                            color: tag.color,
+                            empty: true,
+                            circular: true
+                          }}
                           onClick={() => this.updateTags(tag)}
                           active={this.state.tags.includes(tag)}
                         />

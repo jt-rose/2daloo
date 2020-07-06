@@ -1,6 +1,6 @@
 import { TOGGLE_TAG_VISIBILITY } from '../actions';
 
-const showTags = (state = false, action) => {
+const showTags = (state = true, action) => {
   switch (action.type) {
     case TOGGLE_TAG_VISIBILITY:
       return !state;
