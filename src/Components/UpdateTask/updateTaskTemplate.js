@@ -129,6 +129,28 @@ const updateTaskTemplate = (updateFormat) => {
             onSubmit={this.onSubmit}
             title={updateFormat.pageTitle}
           >
+            {this.state.tags.length > 0 && (
+              <Container
+                textAlign="right"
+                //style={{ paddingTop: '1em' }}
+              >
+                {this.state.tags.map((tag) => (
+                  <Label
+                    color={tag.color}
+                    tag
+                    style={{
+                      minWidth: '8em',
+                      margin: '1em 1em 0em 1em'
+                    }}
+                    //size="big"
+                  >
+                    <div style={{ textAlign: 'center' }}>
+                      {tag.name}
+                    </div>
+                  </Label>
+                ))}
+              </Container>
+            )}
             <Form.Field>
               <label style={{ color: '#2185d0', fontSize: '1.2em' }}>
                 Title
@@ -216,32 +238,10 @@ const updateTaskTemplate = (updateFormat) => {
               <div
                 style={{ display: 'flex', justifyContent: 'center' }}
               >
-                <Label basic color="red">
+                <Label basic color="red" pointing>
                   Only 3 tags may be applied per task!
                 </Label>
               </div>
-            )}
-            {this.state.tags.length > 0 && (
-              <Container
-                textAlign="center"
-                //style={{ paddingTop: '1em' }}
-              >
-                {this.state.tags.map((tag) => (
-                  <Label
-                    color={tag.color}
-                    tag
-                    style={{
-                      minWidth: '8em',
-                      margin: '1em 1em 0em 1em'
-                    }}
-                    size="big"
-                  >
-                    <div style={{ textAlign: 'center' }}>
-                      {tag.name}
-                    </div>
-                  </Label>
-                ))}
-              </Container>
             )}
 
             <Container textAlign="center">
