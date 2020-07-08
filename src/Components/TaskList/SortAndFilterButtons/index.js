@@ -21,7 +21,8 @@ class SortAndFilterButtons extends Component {
     this.toggleOpen = this.toggleOpen.bind(this);
   }
 
-  toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
+  toggleOpen = () =>
+    this.setState((state) => ({ isOpen: !state.isOpen }));
 
   render() {
     return (

@@ -51,7 +51,7 @@ class AddTag extends Component {
   }
   updateName = (e) => {
     if (e.target.value.length > 10) {
-      this.setState({ visibility: !this.state.visibility });
+      this.setState((state) => ({ visibility: !state.visibility }));
     } else {
       this.setState({ name: e.target.value });
     }

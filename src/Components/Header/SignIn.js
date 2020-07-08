@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button, Input } from 'semantic-ui-react';
 
-const SignIn = (props) => (
+const SignIn = () => (
   <Form size="mini">
     <Form.Field inline>
       <Input label="Username" placeholder="..."></Input>

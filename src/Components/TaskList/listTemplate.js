@@ -133,26 +133,30 @@ const mapTasksState = ({
   tags,
   filterImportant,
   filterTags,
-  sortOptions
+  sortOptions,
+  showAll
 }) => ({
   tasks,
   tags,
   filterImportant,
   filterTags,
-  sortOptions
+  sortOptions,
+  showAll
 });
 const mapTrashState = ({
   trash,
   tags,
   filterImportant,
   filterTags,
-  sortOptions
+  sortOptions,
+  showAll
 }) => ({
   tasks: trash,
   tags,
   filterImportant,
   filterTags,
-  sortOptions
+  sortOptions,
+  showAll
 });
 
 export const TaskList = connect(

@@ -91,7 +91,7 @@ const updateTaskTemplate = (updateFormat) => {
       }
     };
     updateImportant = () =>
-      this.setState({ important: !this.state.important });
+      this.setState((state) => ({ important: !state.important }));
     onSubmit = (e) => {
       e.preventDefault();
       const { title, content, important, tags } = this.state;
