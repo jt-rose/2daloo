@@ -56,8 +56,8 @@ export const createTask = (title, content, important, tags) => ({
 });
 
 // apply visibility filters to list of tasks
-const applyImportantFilter = (tasks, onlyImportant) => {
-  if (onlyImportant) {
+const applyImportantFilter = (tasks, onlyShowImportant) => {
+  if (onlyShowImportant) {
     return tasks.filter((task) => task.important);
   } else {
     return tasks;
@@ -78,11 +78,17 @@ export const filterVisibility = (
   tasks,
   onlyImportant,
   filteredTags
-) =>
-  applyTagFilter(
-    applyImportantFilter(tasks, onlyImportant),
+) => {
+  const filteredForImportant = applyImportantFilter(
+    tasks,
+    onlyImportant
+  );
+  const filteredForTags = applyTagFilter(
+    filteredForImportant,
     filteredTags
   );
+  return filteredForTags;
+};
 
 export const updateTask = (newTask, oldSlug = null) => ({
   type: UPDATE_TASK,

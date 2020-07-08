@@ -1,7 +1,7 @@
 // show abc sort, date sort, important filter, category filter
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Dropdown, Checkbox } from 'semantic-ui-react';
+import { Dropdown, Checkbox, Icon } from 'semantic-ui-react';
 
 import {
   sortByNewest,
@@ -78,7 +78,14 @@ class SortAndFilterButtons extends Component {
           <Dropdown.Divider />
           <Dropdown.Header>Important</Dropdown.Header>
           <Dropdown.Item onClick={this.props.toggleImportant}>
-            {<Checkbox slider checked={this.props.filterImportant} />}
+            {
+              <Icon
+                name="exclamation"
+                inverted
+                color={this.props.filterImportant ? 'black' : 'red'}
+              />
+            }
+            {this.props.filterImportant ? 'unfocus' : 'focus'}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
