@@ -18,12 +18,16 @@ const applySorting = (tasks, tags, sortAction) => {
       return Rsort((a, b) => a.title.localeCompare(b.title), tasks);
     case SORT_BY_TAGS:
       const tagNames = tags.map((tag) => tag.name);
-      const sortedTasks = tagNames.flatMap((tagName) =>
-        tasks.filter((task) => task.tags[0] === tagName)
+      const tasksWithTags = tasks.filter(
+        (task) => task.tags.length > 0
       );
       const tasksWithoutTags = tasks.filter(
         (task) => task.tags.length === 0
       );
+      const sortedTasks = tagNames.flatMap((tagName) =>
+        tasksWithTags.filter((task) => task.tags[0].name === tagName)
+      );
+
       return [...sortedTasks, ...tasksWithoutTags];
     default:
       return tasks;
