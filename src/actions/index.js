@@ -21,6 +21,10 @@ export const TOGGLE_TAG_VISIBILITY = 'TOGGLE_TAG_VISIBILITY';
 
 export const TOGGLE_LOGIN = 'TOGGLE_LOGIN';
 
+export const TOGGLE_SHOW_ALL = 'TOGGLE_SHOW_ALL';
+
+export const TOGGLE_TAG_COLORS = 'TOGGLE_TAG_COLORS';
+
 // Action Creators
 
 const actionTypeObj = (typeDesc) => ({ type: typeDesc });
@@ -34,6 +38,8 @@ export const toggleTagVisibility = actionTypeObj(
   TOGGLE_TAG_VISIBILITY
 );
 export const toggleLogin = actionTypeObj(TOGGLE_LOGIN);
+export const toggleShowAll = actionTypeObj(TOGGLE_SHOW_ALL);
+export const toggleTagColors = actionTypeObj(TOGGLE_TAG_COLORS);
 
 export const createSlug = (title) =>
   title.trim().toLowerCase().replace(/,/g, '').replace(/ /g, '-');

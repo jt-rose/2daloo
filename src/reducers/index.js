@@ -6,6 +6,8 @@ import filterTags from './filterTags';
 import sortOptions from './sortOptions';
 import showTags from './showTags';
 import loggedIn from './manageLogin';
+import showAll from './showAll';
+import useTagColors from './useTagColors';
 
 import { combineReducers } from 'redux';
 
@@ -17,5 +19,7 @@ export default combineReducers({
   filterTags,
   sortOptions,
   showTags,
-  loggedIn
+  loggedIn,
+  showAll,
+  useTagColors
 });
