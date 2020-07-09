@@ -75,7 +75,7 @@ const applyTagFilter = (tasks, filteredTags) => {
     return tasks;
   } else {
     return tasks.filter((task) =>
-      task.tags.find((tagName) => filteredTags.includes(tagName))
+      task.tags.find((tag) => filteredTags.includes(tag.name))
     );
   }
 };

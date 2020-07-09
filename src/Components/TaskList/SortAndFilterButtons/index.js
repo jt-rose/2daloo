@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, Checkbox, Icon } from 'semantic-ui-react';
 
+import '../ListOptions/index.css';
+
 import {
   sortByNewest,
   sortByOldest,
@@ -27,6 +29,7 @@ class SortAndFilterButtons extends Component {
   render() {
     return (
       <Dropdown
+        className="list-options-item"
         pointing
         text="sort and filter"
         //open={this.state.isOpen}

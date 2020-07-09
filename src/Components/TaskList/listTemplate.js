@@ -8,6 +8,7 @@ import {
 } from 'semantic-ui-react';
 import { TaskPane, TrashPane } from './taskPaneTemplate';
 import { connect } from 'react-redux';
+import './ListOptions/index.css';
 
 import { filterVisibility } from '../../actions';
 import applySorting from '../../actions/sortUtils';
@@ -17,16 +18,20 @@ import {
   TrashSortButtons
 } from './SortAndFilterButtons';
 
+//
+import { TaskOptions, TrashOptions } from './ListOptions';
+//
+
 const taskType = {
   pageTitle: 'Remaining:',
   paneType: TaskPane,
-  sortButtons: TaskSortButtons
+  listOptions: TaskOptions
 };
 
 const trashType = {
   pageTitle: 'Completed:',
   paneType: TrashPane,
-  sortButtons: TrashSortButtons
+  listOptions: TrashOptions
 };
 
 const semanticColors = {
@@ -79,6 +84,10 @@ const listTemplate = (listType) => {
         key: task.slug,
         title: task.title,
         important: task.important,
+        tagColor:
+          task.tags.length > 0
+            ? semanticColors[task.tags[0].color]
+            : semanticColors['blue'],
         content: {
           content: <listType.paneType task={task} />
         }
@@ -89,24 +98,38 @@ const listTemplate = (listType) => {
       return (
         <main>
           <Container>
-            <Grid container columns="equal">
-              <Grid.Column>
-                <Header textAlign="left" as="h1" color="blue">
+            <div className="accordion-header">
+              {/*<Header textAlign="left" as="h1" color="blue">
+                {listType.pageTitle}
+            </Header>*/}
+              <div>
+                <h1
+                  style={{
+                    color: semanticColors['blue']
+                  }}
+                >
                   {listType.pageTitle}
-                </Header>
-              </Grid.Column>
-              <Grid.Column textAlign="right">
-                <listType.sortButtons />
-              </Grid.Column>
-            </Grid>
+                </h1>
+              </div>
+              <listType.listOptions />
+            </div>
 
             {/*<Accordion defaultActiveIndex={0} styled={true} panels={panels} />*/}
-            <Accordion styled inverted fluid>
+            <Accordion
+              styled
+              inverted
+              fluid
+              exclusive={!this.props.showAll}
+            >
               {panels.map((panel, i) => (
                 <div key={`panel-for-${panel.title}`}>
                   <Accordion.Title
-                    style={{ backgroundColor: '#2185d0' }}
-                    active={activeIndex === i}
+                    style={{
+                      backgroundColor: this.props.useTagColors
+                        ? panel.tagColor
+                        : semanticColors['blue']
+                    }}
+                    active={this.props.showAll || activeIndex === i}
                     index={i}
                     onClick={this.handleClick}
                   >
@@ -125,13 +148,21 @@ const listTemplate = (listType) => {
                             name="exclamation"
                             circular
                             inverted
-                            color="red"
+                            color={
+                              panel.tagColor ===
+                                semanticColors['red'] &&
+                              this.props.useTagColors
+                                ? 'grey'
+                                : 'red'
+                            }
                           />
                         )}
                       </Grid.Column>
                     </Grid>
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === i}>
+                  <Accordion.Content
+                    active={this.props.showAll || activeIndex === i}
+                  >
                     {panel.content.content}
                   </Accordion.Content>
                 </div>
@@ -150,14 +181,16 @@ const mapTasksState = ({
   filterImportant,
   filterTags,
   sortOptions,
-  showAll
+  showAll,
+  useTagColors
 }) => ({
   tasks,
   tags,
   filterImportant,
   filterTags,
   sortOptions,
-  showAll
+  showAll,
+  useTagColors
 });
 const mapTrashState = ({
   trash,
@@ -165,14 +198,16 @@ const mapTrashState = ({
   filterImportant,
   filterTags,
   sortOptions,
-  showAll
+  showAll,
+  useTagColors
 }) => ({
   tasks: trash,
   tags,
   filterImportant,
   filterTags,
   sortOptions,
-  showAll
+  showAll,
+  useTagColors
 });
 
 export const TaskList = connect(

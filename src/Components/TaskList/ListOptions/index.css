@@ -1,0 +1,27 @@
+.list-options-container {
+  display: flex;
+  justify-content: right;
+  flex-grow: 1;
+  align-items: flex-end;
+}
+
+.list-options-item {
+  margin: 0 0 0 2em;
+}
+
+.accordion-header {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 0 1em;
+}
+
+@media (max-width: 685px) {
+  .accordion-header {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .list-options-container {
+    justify-content: space-between;
+  }
+}
