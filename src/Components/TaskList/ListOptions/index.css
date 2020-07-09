@@ -24,4 +24,7 @@
   .list-options-container {
     justify-content: space-between;
   }
+  .list-options-item {
+    margin: 0 0 0 1.5em;
+  }
 }
