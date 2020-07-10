@@ -10,7 +10,7 @@ import { TaskPane, TrashPane } from './taskPaneTemplate';
 import { connect } from 'react-redux';
 import './ListOptions/index.css';
 
-import { filterVisibility } from '../../actions';
+import { filterVisibility, toggleShowAll } from '../../actions';
 import applySorting from '../../actions/sortUtils';
 
 import {
@@ -60,6 +60,9 @@ const listTemplate = (listType) => {
       const newIndex = activeIndex === index ? -1 : index;
 
       this.setState({ activeIndex: newIndex });
+      if (this.props.showAll) {
+        this.props.toggleShowAll();
+      }
     };
 
     render() {
@@ -114,13 +117,7 @@ const listTemplate = (listType) => {
               <listType.listOptions />
             </div>
 
-            {/*<Accordion defaultActiveIndex={0} styled={true} panels={panels} />*/}
-            <Accordion
-              styled
-              inverted
-              fluid
-              exclusive={!this.props.showAll}
-            >
+            <Accordion styled inverted fluid>
               {panels.map((panel, i) => (
                 <div key={`panel-for-${panel.title}`}>
                   <Accordion.Title
@@ -210,11 +207,15 @@ const mapTrashState = ({
   useTagColors
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  toggleShowAll: () => dispatch(toggleShowAll)
+});
+
 export const TaskList = connect(
   mapTasksState,
-  null
+  mapDispatchToProps
 )(listTemplate(taskType));
 export const TrashList = connect(
   mapTrashState,
-  null
+  mapDispatchToProps
 )(listTemplate(trashType));
