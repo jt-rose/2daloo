@@ -25,7 +25,9 @@ const taskPaneTemplate = (ButtonType) => (props) => (
       {props.showTags && props.task.tags.length > 0 && (
         <Grid.Row>
           {props.task.tags.map((tag) => (
-            <Grid.Column>
+            <Grid.Column
+              key={`${props.task.title}-tag-label${tag.name}`}
+            >
               <Label tag color={tag.color}>
                 {tag.name}
               </Label>
