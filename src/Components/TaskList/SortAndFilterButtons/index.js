@@ -1,7 +1,7 @@
 // show abc sort, date sort, important filter, category filter
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Dropdown, Checkbox, Icon } from 'semantic-ui-react';
+import { Dropdown, Icon } from 'semantic-ui-react';
 
 import '../ListOptions/index.css';
 
@@ -14,87 +14,69 @@ import {
   toggleImportant
 } from '../../../actions';
 
-class SortAndFilterButtons extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: true
-    };
-    this.toggleOpen = this.toggleOpen.bind(this);
-  }
-
-  toggleOpen = () =>
-    this.setState((state) => ({ isOpen: !state.isOpen }));
-
-  render() {
-    return (
-      <Dropdown
-        className="list-options-item"
-        pointing
-        text="sort and filter"
-        //open={this.state.isOpen}
-        //onClick={() => console.log("clicked!")}
-      >
-        <Dropdown.Menu>
-          <Dropdown.Header>Sort</Dropdown.Header>
-          <Dropdown.Item
-            icon="sort alphabet down"
-            text="A to Z"
-            onClick={this.props.sortByABC}
-          />
-          <Dropdown.Item
-            icon="sort numeric down"
-            text="Newest"
-            onClick={this.props.sortByNewest}
-          />
-          <Dropdown.Item
-            icon="sort numeric up"
-            text="Oldest"
-            onClick={this.props.sortByOldest}
-          />
-          <Dropdown.Item
-            icon="tags"
-            text="Tag groups"
-            onClick={this.props.sortByTags}
-          />
-          {this.props.tags.length > 0 && (
-            <Dropdown.Menu scrolling>
-              <Dropdown.Header>Filter Tags</Dropdown.Header>
-              {this.props.tags.map((tag) => (
-                <Dropdown.Item
-                  key={tag.name}
-                  value={tag.name}
-                  text={tag.name}
-                  label={{
-                    color: tag.color,
-                    empty: true,
-                    circular: true
-                  }}
-                  active={this.props.filterTags.includes(tag.name)}
-                  //disabled={!this.props.filterTags.includes(tag.name)}
-                  onClick={() => this.props.updateTagFilter(tag.name)}
-                />
-              ))}
-            </Dropdown.Menu>
-          )}
-
-          <Dropdown.Divider />
-          <Dropdown.Header>Important</Dropdown.Header>
-          <Dropdown.Item onClick={this.props.toggleImportant}>
-            {
-              <Icon
-                name="exclamation"
-                inverted
-                color={this.props.filterImportant ? 'black' : 'red'}
-              />
-            }
-            {this.props.filterImportant ? 'unfocus' : 'focus'}
-          </Dropdown.Item>
+const SortAndFilterButtons = (props) => (
+  <Dropdown
+    className="list-options-item"
+    pointing
+    text="sort and filter"
+  >
+    <Dropdown.Menu>
+      <Dropdown.Header>Sort</Dropdown.Header>
+      <Dropdown.Item
+        icon="sort alphabet down"
+        text="A to Z"
+        onClick={props.sortByABC}
+      />
+      <Dropdown.Item
+        icon="sort numeric down"
+        text="Newest"
+        onClick={props.sortByNewest}
+      />
+      <Dropdown.Item
+        icon="sort numeric up"
+        text="Oldest"
+        onClick={props.sortByOldest}
+      />
+      <Dropdown.Item
+        icon="tags"
+        text="Tag groups"
+        onClick={props.sortByTags}
+      />
+      {props.tags.length > 0 && (
+        <Dropdown.Menu scrolling>
+          <Dropdown.Header>Filter Tags</Dropdown.Header>
+          {props.tags.map((tag) => (
+            <Dropdown.Item
+              key={tag.name}
+              value={tag.name}
+              text={tag.name}
+              label={{
+                color: tag.color,
+                empty: true,
+                circular: true
+              }}
+              active={props.filterTags.includes(tag.name)}
+              onClick={() => props.updateTagFilter(tag.name)}
+            />
+          ))}
         </Dropdown.Menu>
-      </Dropdown>
-    );
-  }
-}
+      )}
+
+      <Dropdown.Divider />
+      <Dropdown.Header>Important</Dropdown.Header>
+      <Dropdown.Item onClick={props.toggleImportant}>
+        {
+          <Icon
+            name="exclamation"
+            inverted
+            color={props.filterImportant ? 'black' : 'red'}
+          />
+        }
+        {props.filterImportant ? 'unfocus' : 'focus'}
+      </Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+);
 
 const mapStateToProps = ({ tags, filterImportant, filterTags }) => ({
   tags,

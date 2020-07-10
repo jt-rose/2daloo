@@ -13,14 +13,7 @@ import './ListOptions/index.css';
 import { filterVisibility, toggleShowAll } from '../../actions';
 import applySorting from '../../actions/sortUtils';
 
-import {
-  TaskSortButtons,
-  TrashSortButtons
-} from './SortAndFilterButtons';
-
-//
 import { TaskOptions, TrashOptions } from './ListOptions';
-//
 
 const taskType = {
   pageTitle: 'Remaining:',
@@ -102,9 +95,6 @@ const listTemplate = (listType) => {
         <main>
           <Container>
             <div className="accordion-header">
-              {/*<Header textAlign="left" as="h1" color="blue">
-                {listType.pageTitle}
-            </Header>*/}
               <div>
                 <h1
                   style={{

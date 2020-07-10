@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Header,
   Label,
-  Button,
   Divider,
   Grid,
   Icon
