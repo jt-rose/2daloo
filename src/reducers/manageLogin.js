@@ -1,6 +1,6 @@
 import { TOGGLE_LOGIN } from '../actions';
 
-const loggedIn = (state = false, action) => {
+const loggedIn = (state = true, action) => {
   switch (action.type) {
     case TOGGLE_LOGIN:
       return !state;
