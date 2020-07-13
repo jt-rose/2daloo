@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-  TaskSortButtons,
-  TrashSortButtons
-} from '../SortAndFilterButtons/index';
+import { TaskSortButtons, TrashSortButtons } from './SortAndFilter';
 import TagOptions from './TagOptions';
 import ShowAllButton from './ShowAllButton';
 

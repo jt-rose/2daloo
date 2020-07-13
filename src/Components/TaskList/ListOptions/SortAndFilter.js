@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, Icon } from 'semantic-ui-react';
 
-import '../ListOptions/index.css';
+import './index.css';
 
 import {
   sortByNewest,
