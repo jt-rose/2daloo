@@ -1,3 +1,5 @@
+![2daloo](https://github.com/jt-rose/2daloo/blob/master/README_images/main_image.png)
+
 # 2daloo
 
 2daloo is a task-tracking app with a variety of sorting, tagging, and filtering options available.
