@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Header from './Components/Header';
 import {
@@ -17,17 +17,46 @@ import Login from './Components/Login';
 import SignUp from './Components/Login/SignUp';
 import Error404 from './Components/Error404';
 
-function App(props) {
+// create wrapper to verify signed in before rendering component
+// or redirecting to login page
+const PrivateRouteUC = ({
+  component: Component,
+  loggedIn,
+  ...rest
+}) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        loggedIn ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+};
+
+const mapLoginToProps = ({ loggedIn }) => ({ loggedIn });
+const PrivateRoute = connect(mapLoginToProps, null)(PrivateRouteUC);
+
+function App() {
   return (
     <div className="App">
       <Header />
       <br />
       <Switch>
-        <Route exact path="/" component={TaskList} />
-        <Route exact path="/add" component={AddTask} />
-        <Route path="/edit/:editSlug" component={EditTask} />
-        <Route exact path="/tags" component={TagEditor} />
-        <Route exact path="/trash" component={TrashList} />
+        <PrivateRoute exact path="/" component={TaskList} />
+        <PrivateRoute exact path="/add" component={AddTask} />
+        <PrivateRoute path="/edit/:editSlug" component={EditTask} />
+        <PrivateRoute exact path="/tags" component={TagEditor} />
+        <PrivateRoute exact path="/trash" component={TrashList} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/sign-up" component={SignUp} />
         <Route exact path="/forgot-password" component={SignUp} />
