@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/2daloo/static/css/main.87604f7e.chunk.css",
+    "main.js": "/2daloo/static/js/main.5523965c.chunk.js",
+    "main.js.map": "/2daloo/static/js/main.5523965c.chunk.js.map",
+    "runtime-main.js": "/2daloo/static/js/runtime-main.852b4993.js",
+    "runtime-main.js.map": "/2daloo/static/js/runtime-main.852b4993.js.map",
+    "static/css/2.3b2c6720.chunk.css": "/2daloo/static/css/2.3b2c6720.chunk.css",
+    "static/js/2.202e7704.chunk.js": "/2daloo/static/js/2.202e7704.chunk.js",
+    "static/js/2.202e7704.chunk.js.map": "/2daloo/static/js/2.202e7704.chunk.js.map",
+    "index.html": "/2daloo/index.html",
+    "precache-manifest.63c7d60bdce2766f207c5a64975e3d0f.js": "/2daloo/precache-manifest.63c7d60bdce2766f207c5a64975e3d0f.js",
+    "service-worker.js": "/2daloo/service-worker.js",
+    "static/css/2.3b2c6720.chunk.css.map": "/2daloo/static/css/2.3b2c6720.chunk.css.map",
+    "static/css/main.87604f7e.chunk.css.map": "/2daloo/static/css/main.87604f7e.chunk.css.map",
+    "static/js/2.202e7704.chunk.js.LICENSE.txt": "/2daloo/static/js/2.202e7704.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/2daloo/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.852b4993.js",
+    "static/css/2.3b2c6720.chunk.css",
+    "static/js/2.202e7704.chunk.js",
+    "static/css/main.87604f7e.chunk.css",
+    "static/js/main.5523965c.chunk.js"
+  ]
+}
