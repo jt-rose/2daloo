@@ -4,6 +4,8 @@
 
 2daloo is a task-tracking app with a variety of sorting, tagging, and filtering options available.
 
+The site can be visited [here].
+
 ### Dependencies
 
 - [react] - component-based web architecture
@@ -42,6 +44,7 @@ This app is currently front-end focused, with redux managing a mock-up of the us
 - sort by date, name, important, and tag groups
 - filter to show only important or selected tag groups
 
+[here]: https://jt-rose.github.io/2daloo
 [react]: http://nodejs.org
 [redux]: https://redux.js.org/
 [react-router-dom]: https://www.npmjs.com/package/react-router-dom
