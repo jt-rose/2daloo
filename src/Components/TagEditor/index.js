@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Header,
-  Label,
-  Divider,
-  Grid,
-  Icon
-} from 'semantic-ui-react';
+import { Header, Label, Grid, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import { removeTag } from '../../actions';
@@ -15,14 +9,14 @@ import './index.css';
 
 const TagEditor = (props) => (
   <Grid centered container>
-    <Grid.Row>
+    <Grid.Row key="tags-header">
       <Header as="h2" color="blue">
         Tags
       </Header>
     </Grid.Row>
 
     {props.tags.map((tag) => (
-      <Grid.Row>
+      <Grid.Row key={`tag-${tag.name}`}>
         <Label
           color={tag.color}
           tag
@@ -42,13 +36,14 @@ const TagEditor = (props) => (
         </div>
       </Grid.Row>
     ))}
-    <Grid.Row>
-      <Divider horizontal>
-        <div style={{ color: '#2185d0' }}>Add New Tag</div>
-      </Divider>
+    <Grid.Row key="add-new-tag">
+      <br />
+      <Header size={'small'} style={{ color: '#2185d0' }}>
+        Add New Tag
+      </Header>
     </Grid.Row>
 
-    <Grid.Row>
+    <Grid.Row key="add-tag-section">
       <AddTag />
     </Grid.Row>
   </Grid>
